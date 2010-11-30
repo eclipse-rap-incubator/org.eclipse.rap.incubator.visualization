@@ -134,7 +134,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.Table", {
         },
 
         _sendResponse : function(widget, field, value) {
-			//if (!org_eclipse_rap_rwt_EventUtil_suspend) {
+			//if (!org.eclipse.swt.EventUtil.getSuspended()) {
 				var wm = org.eclipse.swt.WidgetManager.getInstance();
 				var canvasId = wm.findIdByWidget(widget);
 				var req = org.eclipse.swt.Request.getInstance();
