@@ -32,5 +32,5 @@
 <booleanAttribute key="tracing" value="false"/>
 <booleanAttribute key="useCustomFeatures" value="false"/>
 <booleanAttribute key="useDefaultConfigArea" value="false"/>
-<stringAttribute key="workspace_bundles" value="org.eclipse.rap.rwt.visualization.jit@default:default,org.eclipse.rap.rwt.visualization.jit.demo@default:default"/>
+<stringAttribute key="workspace_bundles" value="org.eclipse.rap.rwt.visualization.jit@default:default,org.eclipse.rap.rwt.visualization.jit.demo@default:default,org.eclipse.rap.rwt.excanvas@default:default"/>
 </launchConfiguration>
