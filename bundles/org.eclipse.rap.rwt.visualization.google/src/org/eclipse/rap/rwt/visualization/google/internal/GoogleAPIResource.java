@@ -15,6 +15,8 @@ import org.eclipse.rwt.resources.IResourceManager.RegisterOptions;
 
 public class GoogleAPIResource implements IResource {
 
+  private static final String API_KEY = "org.eclipse.rap.rwt.visualization.google.api";
+
   public String getCharset() {
     return "ISO-8859-1";
   }
@@ -28,7 +30,8 @@ public class GoogleAPIResource implements IResource {
   }
 
   public String getLocation() {
-    return "http://www.google.com/jsapi";
+    //TODO this should be converted to use bundle properties 
+    return System.getProperty(API_KEY, "https://www.google.com/jsapi");
   }
 
   public boolean isJSLibrary() {
