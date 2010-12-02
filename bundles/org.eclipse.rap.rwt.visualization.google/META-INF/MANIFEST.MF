@@ -11,6 +11,5 @@ Import-Package: javax.servlet;version="2.5.0",
 Export-Package: 
  org.eclipse.rap.rwt.visualization.google,
  org.eclipse.rap.rwt.visualization.google.json
-Eclipse-LazyStart: false
 Bundle-Vendor: %Bundle-Vendor
 Bundle-RequiredExecutionEnvironment: J2SE-1.4

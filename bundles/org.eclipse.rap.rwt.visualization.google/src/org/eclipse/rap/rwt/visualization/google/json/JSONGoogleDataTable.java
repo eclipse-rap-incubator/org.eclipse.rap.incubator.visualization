@@ -60,8 +60,7 @@ public class JSONGoogleDataTable {
    * However, the JSON object will not be compatible with the google widgets if java.util.Date instances have
    * been added to this table.
    * <p>
-   * @see JSONGoogleDataTable.toString() to transform this table into a string that is compatible with the
-   * google visualization widgets.
+   * @see JSONGoogleDataTable#toString  JSONGoogleDataTable.toString() to transform this table into a string that is compatible with the google visualization widgets.
    * </p>  
    */
   public JSONObject createTable() {

@@ -27,8 +27,8 @@ import org.eclipse.swt.widgets.Layout;
 public abstract class VisualizationWidget extends Composite {
   
   private String widgetData = "";
-  private String widgetOptions = "";
-  private String widgetSize = "";
+  String widgetOptions = "";
+  String widgetSize = "";
   private String selectedItem = "";
   private String selectedRow = "";
   private String selectedColumn = "";
