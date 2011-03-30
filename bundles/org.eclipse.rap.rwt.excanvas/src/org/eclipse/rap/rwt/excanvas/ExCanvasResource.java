@@ -16,7 +16,6 @@
  *****************************************************************************/
 package org.eclipse.rap.rwt.excanvas;
 
-import org.eclipse.rwt.internal.util.HTML;
 import org.eclipse.rwt.resources.IResource;
 import org.eclipse.rwt.resources.IResourceManager.RegisterOptions;
 
@@ -26,7 +25,7 @@ public class ExCanvasResource implements IResource {
   private String location;
   
   public String getCharset() {
-    return HTML.CHARSET_NAME_ISO_8859_1;
+    return "UTF-8";
   }
 
   public ClassLoader getLoader() {
