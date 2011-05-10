@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright © 2010-2011 Austin Riddle and others.
+ * Copyright ï¿½ 2010-2011 Austin Riddle and others.
  * All Rights Reserved.
  * 
  * This program and the accompanying materials
@@ -78,10 +78,6 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.TreeMap",
 				var vizStyle = "#infovis div {position:absolute;overflow:hidden;font-size:11px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;}#infovis .content {background-color:#333;border:0px solid #111;} #infovis .head {color:white;background-color:#444;} #infovis .head.in-path {background-color:#655;} #infovis .body {background-color:black;} #infovis .leaf {color:white;background-color:#111;display:table-cell;vertical-align:middle;border:1px solid #000;} #infovis .over-leaf {border:1px solid #9FD4FF;} #infovis .over-content {background-color: #9FD4FF;} #infovis .over-head {background-color:#A4D9FF;color:black;} .tip {color: #fff;width: 139px;background-color: black;opacity:0.9;filter:alpha(opacity=90);font-size:10px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;padding:7px;} .album {width:100px;margin:3px;} input {font-size:10px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;}";
 				vizStyle = vizStyle.replace(/infovis/gi,vizId);
 				qx.html.StyleSheet.createElement(vizStyle);
-//				
-//				if (qx.core.Client.isMshtml()) {
-//					vizParent = G_vmlCanvasManager.initElement(vizParent);
-//				}
 				
 				var config = {
 				    titleHeight: 13,

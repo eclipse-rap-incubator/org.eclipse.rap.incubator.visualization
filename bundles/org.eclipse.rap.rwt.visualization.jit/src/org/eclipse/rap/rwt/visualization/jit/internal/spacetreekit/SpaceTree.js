@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright © 2010-2011 Texas Center for Applied Technology
+ * Copyright ï¿½ 2010-2011 Texas Center for Applied Technology
  * Texas Engineering Experiment Station
  * The Texas A&M University System
  * All Rights Reserved.
@@ -89,10 +89,7 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.SpaceTree",
 			        'height': this.getHeight()
 			    });
 				qParent._canvas = canvas;
-//				
-//				if (qx.core.Client.isMshtml()) {
-//					vizParent = G_vmlCanvasManager.initElement(vizParent);
-//				}
+
 				var widgetId = this._id;
 				vizParent.width = this.getWidth();
 				vizParent.height = this.getHeight();

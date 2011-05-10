@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright © 2010-2011 Austin Riddle.
+ * Copyright ï¿½ 2010-2011 Austin Riddle.
  * All Rights Reserved.
  * 
  * This program and the accompanying materials
@@ -83,10 +83,7 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.HyperTree",
 			        'height': this.getHeight()
 			    });
 				qParent._canvas = canvas;
-//				
-//				if (qx.core.Client.isMshtml()) {
-//					vizParent = G_vmlCanvasManager.initElement(vizParent);
-//				}
+
 				vizParent.width = this.getWidth();
 				vizParent.height = this.getHeight();
 				var widgetId = this._id;
