@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright © 2008-2010 Texas Center for Applied Technology
+ * Copyright (c) 2008-2010 Texas Center for Applied Technology
  * Texas Engineering Experiment Station
  * The Texas A&M University System
  * All Rights Reserved.
