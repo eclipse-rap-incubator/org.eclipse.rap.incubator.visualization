@@ -20,6 +20,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.rap.rwt.visualization.jit.HyperTree;
 import org.eclipse.rap.rwt.visualization.jit.JITVisualizationWidget;
 import org.eclipse.rap.rwt.visualization.jit.RGraph;
@@ -42,6 +44,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
+import org.osgi.framework.Bundle;
 
 /**
  * This class controls all aspects of the application's execution
@@ -251,7 +254,8 @@ public class Application implements IEntryPoint {
     StringBuffer data = new StringBuffer();
     try 
     {
-      InputStream in = Activator.getDefault().getBundle().getResource(sampleFilePath).openStream();
+      Bundle bundle = Activator.getDefault().getBundle();
+      InputStream in = FileLocator.openStream(bundle,new Path(sampleFilePath),true);
       BufferedReader br = new BufferedReader(new InputStreamReader(in));
       try 
       {
