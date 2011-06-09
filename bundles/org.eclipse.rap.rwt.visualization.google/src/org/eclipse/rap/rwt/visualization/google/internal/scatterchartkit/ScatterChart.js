@@ -73,7 +73,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.ScatterChart", {
         		chart = this._chart;
         		var qParent = this;
         		google.visualization.events.addListener(this._chart, 'ready', function() {
-        			this.info("Chart is ready.");
+        			qParent.info("Chart is ready.");
         			qParent.inited = true;
         		});
         		var widgetId = this._id;
