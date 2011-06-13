@@ -225,7 +225,7 @@
             } ],
         "data" : { "$area" : 62 },
         "id" : "7bdb6921-8380-422c-8514-87cf30d5d8cca",
-        "name" : "Króm"
+        "name" : "Krï¿½m"
       },
       { "children" : [ { "children" : [  ],
               "data" : { "$area" : "57",
@@ -252,8 +252,8 @@
                   "$color" : "7",
                   "image" : "http://cdn.last.fm/flatness/catalogue/noimage/2/default_album_mega.png"
                 },
-              "id" : "c5998351-be49-49d8-8593-3e96f129c1fcReggae à Coup de Cirque",
-              "name" : "Reggae à Coup de Cirque"
+              "id" : "c5998351-be49-49d8-8593-3e96f129c1fcReggae ï¿½ Coup de Cirque",
+              "name" : "Reggae ï¿½ Coup de Cirque"
             },
             { "children" : [  ],
               "data" : { "$area" : "135",
