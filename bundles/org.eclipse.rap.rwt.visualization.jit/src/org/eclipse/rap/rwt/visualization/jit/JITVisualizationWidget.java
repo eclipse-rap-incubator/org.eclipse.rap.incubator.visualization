@@ -61,7 +61,7 @@ public abstract class JITVisualizationWidget extends Composite {
    */
   public void setSelectedNodeId (String selectedNodeId) {
     this.selectedNodeId = selectedNodeId;
-    addCommand("selectNode",null);
+    addCommand("selectNode",new Object[]{selectedNodeId});
   }
   
   /**
