@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright © 2010-2011 Austin Riddle
+ * Copyright ï¿½ 2010-2011 Austin Riddle
  * All Rights Reserved.
  * 
  * This program and the accompanying materials
@@ -23,8 +23,8 @@ public class HyperTree extends JITGraphWidget
   public HyperTree( final Composite parent, final int style )
   {
     super( parent, style );
-    nodeColor = new RGB(240,0,0);
-    edgeColor = new RGB(8,143,255);
+    setNodeColor(new RGB(240,0,0));
+    setEdgeColor(new RGB(8,143,255));
   }
 
   public void previousState() {

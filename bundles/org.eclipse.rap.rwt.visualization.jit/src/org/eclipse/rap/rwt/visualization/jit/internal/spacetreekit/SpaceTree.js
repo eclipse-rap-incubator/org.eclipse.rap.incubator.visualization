@@ -28,19 +28,11 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.SpaceTree",
 		visible : {
 			init :"",
 			apply :"load"
-	    },
-	    widgetData : {
-	    	init :"",
-			apply :"refreshData"
-	    },
-	    nodeColor : {
-	    	init :"",
-			apply :"applyNodeColor"
-	    },
-	    edgeColor : {
-	    	init :"",
-			apply :"applyEdgeColor"
-	    }
+	  },
+	  widgetData : {
+	  	init :"",
+		  apply :"refreshData"
+	  }
 	},
 
 	destruct : function() {
@@ -94,7 +86,7 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.SpaceTree",
 				vizParent.width = this.getWidth();
 				vizParent.height = this.getHeight();
 			    var st = new ST(canvas, {
-			    	orientation: "left",  
+			    	  orientation: "left",  
 			    	  levelsToShow: 2,  
 			    	  subtreeOffset: 8,  
 			    	  siblingOffset: 5,  
@@ -104,7 +96,7 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.SpaceTree",
 			    	  multitree: false,  
 			    	  indent: 10,  
 			    	  //set distance between node and its children
-			          levelDistance: 50,
+			        levelDistance: 50,
 			    	  Node: {  
 			    	    overridable: true,  
 			    	    type: 'rectangle',  
@@ -256,31 +248,44 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.SpaceTree",
 			}
 		},
 		
-		applyNodeColor : function (color) {
-			try {
-				var st = this._viz;
-				if (st != null) {
-					st.controller.Node.color = color;
-					st.refresh();
-				}
-			}
-			catch (e) {
-				this.info(e);
-			}
-		},
-		
-		applyEdgeColor : function (color) {
-			try {
-				var st = this._viz;
-				if (st != null) {
-					st.controller.Edge.color = color;
-					st.refresh();
-				}
-			}
-			catch (e) {
-				this.info(e);
-			}
-		},
+		setProperty : function (propName, propValue) {
+      try {
+        var st = this._viz;
+        if (st != null) {
+          st.controller[propName] = propValue;
+          st.refresh();
+        }
+      }
+      catch (e) {
+        this.info(e);
+      }
+    },
+    
+    setNodeProperty : function (propName, propValue) {
+      try {
+        var st = this._viz;
+        if (st != null) {
+          st.controller.Node[propName] = propValue;
+          st.refresh();
+        }
+      }
+      catch (e) {
+        this.info(e);
+      }
+    },
+    
+    setEdgeProperty : function (propName, propValue) {
+      try {
+        var st = this._viz;
+        if (st != null) {
+          st.controller.Edge[propName] = propValue;
+          st.refresh();
+        }
+      }
+      catch (e) {
+        this.info(e);
+      }
+    },
 		
 		selectNode : function (id) {
 			try {

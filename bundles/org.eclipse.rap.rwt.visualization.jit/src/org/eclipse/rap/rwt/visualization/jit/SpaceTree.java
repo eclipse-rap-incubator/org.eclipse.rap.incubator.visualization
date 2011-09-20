@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright © 2010-2011 Austin Riddle
+ * Copyright ï¿½ 2010-2011 Austin Riddle
  * All Rights Reserved.
  * 
  * This program and the accompanying materials
@@ -22,8 +22,8 @@ public class SpaceTree extends JITGraphWidget
     public SpaceTree( final Composite parent, final int style )
     {
       super( parent, style );
-      nodeColor = new RGB(255,221,136);
-      edgeColor = new RGB(0,0,200);
+      setNodeColor(new RGB(255,221,136));
+      setEdgeColor(new RGB(0,0,200));
     }
-    
+
 }

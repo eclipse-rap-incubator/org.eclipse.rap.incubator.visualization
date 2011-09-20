@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright © 2010-2011 Texas Center for Applied Technology
+ * Copyright ï¿½ 2010-2011 Texas Center for Applied Technology
  * Texas Engineering Experiment Station
  * The Texas A&M University System
  * All Rights Reserved.
@@ -238,6 +238,8 @@ public class Application implements IEntryPoint {
       viz = new SpaceTree(parent, SWT.BORDER);
       String sampleData = loadSampleData("samples/spacetree.json");
       viz.setJSONData(sampleData);
+      viz.setProperty("orientation", "top");
+      viz.setEdgeProperty("type", "bezier");
       viz.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
       viz.addListener(SWT.Selection, createSelectionListener());
     }

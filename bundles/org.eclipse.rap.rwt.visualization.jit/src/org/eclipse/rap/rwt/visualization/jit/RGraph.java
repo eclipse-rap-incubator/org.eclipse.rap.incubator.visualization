@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright © 2010-2011 Austin Riddle
+ * Copyright ï¿½ 2010-2011 Austin Riddle
  * All Rights Reserved.
  * 
  * This program and the accompanying materials
@@ -22,8 +22,8 @@ public class RGraph extends JITGraphWidget
     public RGraph( final Composite parent, final int style )
     {
       super( parent, style );
-      nodeColor = new RGB(204,221,238);
-      edgeColor = new RGB(119,34,119);
+      setNodeColor(new RGB(204,221,238));
+      setEdgeColor(new RGB(119,34,119));
     }
     
 }

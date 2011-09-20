@@ -25,19 +25,11 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.HyperTree",
 		visible : {
 			init :"",
 			apply :"load"
-	    },
-	    widgetData : {
-	    	init :"",
+	  },
+	  widgetData : {
+	  	init :"",
 			apply :"refreshData"
-	    },
-	    nodeColor : {
-	    	init :"",
-			apply :"applyNodeColor"
-	    },
-	    edgeColor : {
-	    	init :"",
-			apply :"applyEdgeColor"
-	    }
+	  }
 	},
 
 	destruct : function() {
@@ -214,32 +206,44 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.HyperTree",
 			}
 		},
 		
-		applyNodeColor : function (color) {
-			try {
-				this.info("Setting node color: "+color);
-				var ht = this._viz;
-				if (ht != null) {
-					ht.controller.Node.color = color;
-					ht.refresh(true);
-				}
-			}
-			catch (e) {
-				this.info(e);
-			}
-		},
-		
-		applyEdgeColor : function (color) {
-			try {
-				this.info("Setting edge color: "+color);
-				var ht = this._viz;
-				if (ht != null) {
-					ht.controller.Edge.color = color;
-				}
-			}
-			catch (e) {
-				this.info(e);
-			}
-		},
+		setProperty : function (propName, propValue) {
+      try {
+        var st = this._viz;
+        if (st != null) {
+          st.controller[propName] = propValue;
+          st.refresh();
+        }
+      }
+      catch (e) {
+        this.info(e);
+      }
+    },
+    
+    setNodeProperty : function (propName, propValue) {
+      try {
+        var st = this._viz;
+        if (st != null) {
+          st.controller.Node[propName] = propValue;
+          st.refresh();
+        }
+      }
+      catch (e) {
+        this.info(e);
+      }
+    },
+    
+    setEdgeProperty : function (propName, propValue) {
+      try {
+        var st = this._viz;
+        if (st != null) {
+          st.controller.Edge[propName] = propValue;
+          st.refresh();
+        }
+      }
+      catch (e) {
+        this.info(e);
+      }
+    },
 		
 		selectNode : function (id) {
 			try {
