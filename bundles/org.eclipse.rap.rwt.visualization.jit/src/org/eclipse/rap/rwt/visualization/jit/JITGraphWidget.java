@@ -54,7 +54,7 @@ public abstract class JITGraphWidget extends JITVisualizationWidget {
    * @param propName - the name of the property
    * @param propValue - the value of the property
    */
-  public void setProperty (String propName, String propValue) {
+  public void setProperty (String propName, Object propValue) {
      addCommand("setProperty", new Object[] {propName, propValue});
   }
   
@@ -65,7 +65,7 @@ public abstract class JITGraphWidget extends JITVisualizationWidget {
    * @param propName - the name of the property
    * @param propValue - the value of the property
    */
-  public void setNodeProperty(String propName, String propValue)
+  public void setNodeProperty(String propName, Object propValue)
   {
      addCommand("setNodeProperty", new Object[] {propName, propValue});
   }
@@ -76,7 +76,7 @@ public abstract class JITGraphWidget extends JITVisualizationWidget {
    * @param propName - the name of the property
    * @param propValue - the value of the property
    */
-  public void setEdgeProperty(String propName, String propValue)
+  public void setEdgeProperty(String propName, Object propValue)
   {
      addCommand("setEdgeProperty", new Object[] {propName, propValue});
   }
