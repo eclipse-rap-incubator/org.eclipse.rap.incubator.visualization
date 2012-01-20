@@ -56,162 +56,150 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.RGraph",
 		},
 		
 		load : function() {
-	      var parent = this;
+		  var parent = this;
 		  try {
-			var vis = this.getVisible();
-			if (vis == "false") {
-				// make invisible
-				return;
-			}
-			qx.ui.core.Widget.flushGlobalQueues();
-			if (this._viz == null) {
-				this.info("Creating rgraph.");
-				var qParent = document.getElementById(this._id);
-				var vizParent = document.createElement("div");
-				var vizId = "vizParent"+this._id;
-				vizParent.setAttribute("id", vizId);
-				qParent.appendChild(vizParent);
-				/* style for node labels */
-//				var vizStyle = ".node {color: white;background-color:transparent;cursor:pointer;font-weight:bold;opacity:0.9;} .node:hover {cursor:pointer;color: #222;background-color:white;font-weight:bold;opacity:1;}";
-//				qx.html.StyleSheet.createElement(vizStyle);
-				
-				var canvas = new Canvas('vizCanvas'+this._id, {
-			        'injectInto': "vizParent"+this._id,
-			        'width': this.getWidth(),
-			        'height': this.getHeight(),
-			        //Optional: create a background canvas and plot
-			        //concentric circles in it.
-			        'backgroundCanvas': {
-			            'styles': {
-			                'strokeStyle': '#555'
-			            },
-			            
-			            'impl': {
-			                'init': function(){},
-			                'plot': function(canvas, ctx){
-			                    var times = 6, d = 100;
-			                    var pi2 = Math.PI * 2;
-			                    for (var i = 1; i <= times; i++) {
-			                        ctx.beginPath();
-			                        ctx.arc(0, 0, i * d, 0, pi2, true);
-			                        ctx.stroke();
-			                        ctx.closePath();
-			                    }
-			                }
-			            }
-				    }
-			    });
-				qParent._canvas = canvas;
-
-				var widgetId = this._id;
-				vizParent.width = this.getWidth();
-				vizParent.height = this.getHeight();
-			    var rg = new RGraph(canvas, {
-			    	 //interpolation type, can be linear or polar  
-			        //interpolation: 'linear',  
-			        //parent-children distance  
-			        //levelDistance: 100,  
-			          //withLabels: true,
-			    	  duration: 1000,  
-			    	  fps: 25,
-			          Node: {  
+		    var vis = this.getVisible();
+		    if (vis == "false") {
+		      // make invisible
+		      return;
+		    }
+		    qx.ui.core.Widget.flushGlobalQueues();
+		    if (this._viz == null) {
+		      this.info("Creating rgraph.");
+		      var qParent = document.getElementById(this._id);
+		      var vizParent = document.createElement("div");
+		      var vizId = "vizParent"+this._id;
+		      vizParent.setAttribute("id", vizId);
+		      qParent.appendChild(vizParent);
+		      var widgetId = this._id;
+		      vizParent.width = this.getWidth();
+		      vizParent.height = this.getHeight();
+		      var rg = new $jit.RGraph({
+		        injectInto: vizId,
+		        //Optional: create a background canvas that plots  
+		        //concentric circles.  
+		        background: {  
+		          CanvasStyles: {  
+		            strokeStyle: '#555'  
+		          }  
+		        }, 
+		        //interpolation type, can be linear or polar  
+		        //interpolation: 'linear',  
+		        //parent-children distance  
+		        //levelDistance: 100,  
+		        //withLabels: true,
+		        duration: 1000,  
+		        fps: 25,
+		        Navigation: {  
+              enable:true,  
+              panning:true,
+              zooming: 20
+            },
+		        Node: {  
 //			            overridable: false,  
 //			            type: 'circle',
-			            color: '#ccddee'
+		          color: '#ccddee'
 //			            lineWidth: 1,  
 //			            height: 5,  
 //			            width: 5,  
 //			            dim: 3  
-			          },  
-			          Edge: {  
+		        },  
+		        Edge: {  
 //			            overridable: false,  
 //			            type: 'line',  
-			            color: '#772277' 
+		          color: '#772277' 
 //			            lineWidth: 1  
-			          },  
-			          onBeforeCompute: function(node) {  
-			            //do something onBeforeCompute  
-			          },  
-			          onAfterCompute: function(){
-			        	  var node = Graph.Util.getClosestNodeToOrigin(rg.graph, "pos");
-			        	  qParent.selection = node;
-			        	  //fire selection event
-			        	  var req = org.eclipse.swt.Request.getInstance();
-			        	  req.addParameter(widgetId + ".selectedNode", node.id);
-			        	  req.addEvent( "org.eclipse.swt.events.widgetSelected", widgetId );
-			        	  req.send();
-			          },  
-			        //Change some label dom properties.
-			          //This method is called each time a label is plotted.
-			          onPlaceLabel: function(domElement, node){
-			              var style = domElement.style;
-			              style.display = '';
-			              style.cursor = 'pointer';
-			              var font = parent.getFont();
-			              style.fontFamily = font.getFamily();
-			              style.fontStyle = font.generateStyle();
-			              var color = parent.getTextColor();
-			              if (node._depth <= 1) {
-			            	  style.fontSize = font.getSize();
-			            	  style.color = color;
-			            	  
-			              } else if(node._depth == 2){
-			            	  style.fontSize = font.getSize()-2;
-			            	  style.color = "#555";
-			            	  
-			              } else {
-			            	  style.display = 'none';
-			              }
-			              
-			              var left = parseInt(style.left);
-			              var w = domElement.offsetWidth;
-			              style.left = (left - w / 2) + 'px';
-			          }, 
-			          
-			          //Add a controller to make the tree move on click.  
-			          onCreateLabel: function(domElement, node) {  
-			        	  domElement.innerHTML = node.name;
-			        	  domElement.onclick = function() {
-			        		  rg.onClick(node.id);  
-			        	  };  
-			          },   
-			          onBeforePlotNode:function(node) {  
-			            //do something onBeforePlotNode  
-			          },  
-			          onAfterPlotNode: function(node) {  
-			            //do something onAfterPlotNode  
-			          },  
-			          onBeforePlotLine:function(adj) {  
-			            //do something onBeforePlotLine  
-			          },  
-			          onAfterPlotLine: function(adj) {  
-			            //do something onAfterPlotLine  
-			          }  
-			    });
-			    
-			    this.addEventListener("changeWidth", function(e) {
-					if (canvas != null) {
-						canvas.width = e.getValue();
-						vizParent.width = e.getValue();
-						canvas.resize(vizParent.width, vizParent.height);
-	             		rg.refresh();
-					}
-				});
-				this.addEventListener("changeHeight", function(e) {
-					if (canvas != null) {
-						canvas.height = e.getValue();
-						vizParent.height = e.getValue();
-						canvas.resize(vizParent.width, vizParent.height);
-						rg.refresh();
-					}
-				});
-			    
-				this._viz = rg;
-				this._vizParent = vizParent;
-			}
+		        },  
+		        onBeforeCompute: function(node) {  
+		          //do something onBeforeCompute  
+		        },  
+		        onAfterCompute: function(){
+		          var node = $jit.Graph.Util.getClosestNodeToOrigin(rg.graph, "current");
+		          qParent.selection = node;
+		          //fire selection event
+		          parent.info("Sending selected node: "+node.id);
+		          var req = org.eclipse.swt.Request.getInstance();
+		          req.addParameter(widgetId + ".selectedNode", node.id);
+		          req.addEvent( "org.eclipse.swt.events.widgetSelected", widgetId );
+		          req.send();
+		        },  
+		        //Change some label dom properties.
+		        //This method is called each time a label is plotted.
+		        onPlaceLabel: function(domElement, node){
+		          var style = domElement.style;
+		          style.display = '';
+		          style.cursor = 'pointer';
+		          var font = parent.getFont();
+		          style.fontFamily = font.getFamily();
+		          try {
+		            style.fontStyle = font.generateStyle();
+		          }
+		          catch (e) {
+		            //ignore..some items are not cross - browser compatible
+		          }
+		          var color = parent.getTextColor();
+		          if (node._depth <= 1) {
+		            style.fontSize = font.getSize();
+		            style.color = color;
+		            
+		          } else if(node._depth == 2){
+		            style.fontSize = font.getSize()-2;
+		            style.color = "#555";
+		            
+		          } else {
+		            style.display = 'none';
+		          }
+		          var left = parseInt(style.left);
+		          var w = domElement.offsetWidth;
+		          style.left = (left - w / 2) + 'px';
+		        }, 
+		        
+		        //Add a controller to make the tree move on click.  
+		        onCreateLabel: function(domElement, node) {  
+		          domElement.innerHTML = node.name;
+		          domElement.onclick = function() {
+		            rg.onClick(node.id);  
+		          };  
+		        },   
+		        onBeforePlotNode:function(node) {  
+		          //do something onBeforePlotNode  
+		        },  
+		        onAfterPlotNode: function(node) {  
+		          //do something onAfterPlotNode  
+		        },  
+		        onBeforePlotLine:function(adj) {  
+		          //do something onBeforePlotLine  
+		        },  
+		        onAfterPlotLine: function(adj) {  
+		          //do something onAfterPlotLine  
+		        }  
+		      });
+		      
+		      this.addEventListener("changeWidth", function(e) {
+		        if (vizParent != null) {
+		          vizParent.width = e.getValue();
+		          if (vizParent.height != null && vizParent.width != null) {
+		            rg.canvas.resize(vizParent.width, vizParent.height);
+		            rg.refresh();
+		          }
+		        }
+		      });
+		      this.addEventListener("changeHeight", function(e) {
+		        if (vizParent != null) {
+		          vizParent.height = e.getValue();
+		          if (vizParent.height != null && vizParent.width != null) {
+		            rg.canvas.resize(vizParent.width, vizParent.height);
+		            rg.refresh();
+		          }
+		        }
+		      });
+		      
+		      this._viz = rg;
+		      this._vizParent = vizParent;
+		    }
 		  }
 		  catch (e) {
-			 this.info(e);
+		    this.info(e);
 		  }
 		},
 		
@@ -221,23 +209,22 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.RGraph",
 		},
 		
 		refreshData : function () {
-			try {
-		      var rg = this._viz;
-		      if (rg != null) {
-		    	  var data = this.getWidgetData();
-		    	  if (data != null) {
-		    		this.info("Loading rgraph data.");
-	//	    	    this.info(data);
-		    	    rg.loadJSON(data);
-		    	    this.info("Refreshing rgraph.");
-				    rg.refresh();
-				    ht.controller.onAfterCompute();
-		    	  }
+		  try {
+		    var rg = this._viz;
+		    if (rg != null) {
+		      var data = this.getWidgetData();
+		      if (data != null) {
+		        this.info("Loading rgraph data.");
+		        rg.loadJSON(data);
+		        this.info("Refreshing rgraph.");
+		        rg.refresh();
+		        rg.controller.onAfterCompute();
 		      }
-			}
-			catch (e) {
-				this.info(e);
-			}
+		    }
+		  }
+		  catch (e) {
+		    this.info(e);
+		  }
 		},
 		
 		setProperty : function (propName, propValue) {
@@ -271,6 +258,19 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.RGraph",
         var st = this._viz;
         if (st != null) {
           st.controller.Edge[propName] = propValue;
+          st.refresh();
+        }
+      }
+      catch (e) {
+        this.info(e);
+      }
+    },
+    
+    setZoom : function (percent) {
+      try {
+        var st = this._viz;
+        if (st != null) {
+          st.canvas.scale(percent,percent);
           st.refresh();
         }
       }

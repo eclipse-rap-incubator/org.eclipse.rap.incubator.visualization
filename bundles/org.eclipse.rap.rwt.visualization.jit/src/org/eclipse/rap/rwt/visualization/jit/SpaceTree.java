@@ -23,7 +23,17 @@ public class SpaceTree extends JITGraphWidget
     {
       super( parent, style );
       setNodeColor(new RGB(255,221,136));
-      setEdgeColor(new RGB(0,0,200));
+      setEdgeColor(new RGB(130,155,205));
     }
+
+     
+//    /**
+//     * Sets the zoom level of the graph canvas.
+//     * @see <A href="http://thejit.org">JIT API documentation </A>
+//     * @param percent - the percentage zoom level
+//     */
+//    public void zoomToFit() {
+//       addCommand("zoomToFit", null);
+//    }
 
 }

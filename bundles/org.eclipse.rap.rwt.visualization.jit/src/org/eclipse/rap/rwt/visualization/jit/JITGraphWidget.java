@@ -80,6 +80,15 @@ public abstract class JITGraphWidget extends JITVisualizationWidget {
   {
      addCommand("setEdgeProperty", new Object[] {propName, propValue});
   }
+  
+  /**
+   * Sets the zoom level of the graph canvas.
+   * @see <A href="http://thejit.org">JIT API documentation </A>
+   * @param percent - the percentage zoom level
+   */
+  public void setZoom(double percent) {
+     addCommand("setZoom", new Object[] {Double.valueOf(percent)});
+  }
 
   protected String convertRGBToCSSString(RGB color) {
      if (color == null) return "";

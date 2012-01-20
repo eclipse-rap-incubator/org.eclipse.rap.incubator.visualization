@@ -57,118 +57,96 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.TreeMap",
 		},
 		
 		load : function() {
-	      var parent = this;
+		  var parent = this;
 		  try {
-			var vis = this.getVisible();
-			if (vis == "false") {
-				// make invisible
-				return;
-			}
-			qx.ui.core.Widget.flushGlobalQueues();
-			if (this._viz == null) {
-				this.info("Creating treemap.");
-				
-				var qParent = document.getElementById(this._id);
-				var vizParent = document.createElement("div");
-				var vizId = "vizParent"+this._id;
-				vizParent.setAttribute("id", vizId);
-				vizParent.setAttribute("style","position:absolute;overflow:hidden;display:table-cell;width:100%;vertical-align:middle;height:100%;z-order:auto;");
-				qParent.appendChild(vizParent);
-				
-				var vizStyle = "#infovis div {position:absolute;overflow:hidden;font-size:11px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;}#infovis .content {background-color:#333;border:0px solid #111;} #infovis .head {color:white;background-color:#444;} #infovis .head.in-path {background-color:#655;} #infovis .body {background-color:black;} #infovis .leaf {color:white;background-color:#111;display:table-cell;vertical-align:middle;border:1px solid #000;} #infovis .over-leaf {border:1px solid #9FD4FF;} #infovis .over-content {background-color: #9FD4FF;} #infovis .over-head {background-color:#A4D9FF;color:black;} .tip {color: #fff;width: 139px;background-color: black;opacity:0.9;filter:alpha(opacity=90);font-size:10px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;padding:7px;} .album {width:100px;margin:3px;} input {font-size:10px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;}";
-				vizStyle = vizStyle.replace(/infovis/gi,vizId);
-				qx.html.StyleSheet.createElement(vizStyle);
-				
-				var config = {
-				    titleHeight: 13,
-			        //The id of the treemap container
-			        rootId: vizId,
-			        //Set the max. depth to be shown for a subtree
-			        levelsToShow: 1,
-			        offset:1,
-
-			        //Add click handlers for
-			        //zooming the Treemap in and out
-			        addLeftClickHandler: true,
-			        addRightClickHandler: true,
-			        
-			        //When hovering a node highlight the nodes
-			        //between the root node and the hovered node. This
-			        //is done by adding the 'in-path' CSS class to each node.
-			        selectPathOnHover: true,
-			        Color: {  
-			            //Allow coloring  
-			            allow: true,  
-			            //Set min value and max value constraints  
-			            //for the *$color* property value.  
-			            //Default's to -100 and 100.  
-			            minValue: 1,  
-			            maxValue: 50,  
-			            //Set color range. Default's to reddish and greenish.  
-			            //It takes an array of three  
-			            //integers as R, G and B values.  
-			            minColorValue: [0, 255, 50],  
-			            maxColorValue: [255, 0, 50]  
-			        },
-			        
-			        //Allow tips
-			        Tips: {
-			          allow: true,
-			          //add positioning offsets
-			          offsetX: 20,
-			          offsetY: 20,
-			          //implement the onShow method to
-			          //add content to the tooltip when a node
-			          //is hovered
-			          onShow: function(tip, node, isLeaf, domElement) {
-			              tip.innerHTML = "<div>" + node.name + "</div>" + 
-			                "<div>" + this.makeHTMLFromData(node.data) + "</div>"; 
-			          },  
-
-			          //Aux method: Build the tooltip inner html by using the data property
-			          makeHTMLFromData: function(data){
-			              var html = '';
-			              html += "playcount" + ': ' + data.$area + '<br />';
-			              if ("$color" in data) 
-			                  html += "rank" + ': ' + data.$color + '<br />';
-			              if ("image" in data) 
-			                  html += "<img src=\"" + data.image + "\" />";
-			              return html;
-			          }
-			        },
-
-			        //Implement this method for retrieving a requested
-			        //subtree that has as root a node with id = nodeId,
-			        //and level as depth. This method could also make a server-side
-			        //call for the requested subtree. When completed, the onComplete 
-			        //callback method should be called.
-//			        request: function(nodeId, level, onComplete){
-//			        	this.info("Refreshing treemap child.");
-//			        	var data = this.getWidgetData();
-////				    	  this.info(data);
-////			        	if (data != undefined) {
-////					    	var root = data.substring(0,data.length); 
-////				            var subtree = TreeUtil.getSubtree(root, nodeId);
-////				            TreeUtil.prune(subtree, 1);
-////				            onComplete.onComplete(nodeId, subtree);
-////			        	}
-//			        },
-			        //Remove all events for the element before destroying it.
-			        onDestroyElement: function(content, tree, isLeaf, leaf){
-			            if(leaf.clearAttributes) leaf.clearAttributes();
-			        }
-			    };
-				var tm = null;
-				if (this._type == 2) {
-					tm = new TM.Strip(config);
-				}
-				else if (this._type == 1) {
-					tm = new TM.Squarified(config);
-				}
-				else {
-					tm = new TM.SliceAndDice(config);
-				}
-				
+		    var vis = this.getVisible();
+		    if (vis == "false") {
+		      // make invisible
+		      return;
+		    }
+		    qx.ui.core.Widget.flushGlobalQueues();
+		    if (this._viz == null) {
+		      this.info("Creating treemap.");
+		      
+		      var qParent = document.getElementById(this._id);
+		      var vizParent = document.createElement("div");
+		      var vizId = "vizParent"+this._id;
+		      vizParent.setAttribute("id", vizId);
+		      vizParent.setAttribute("style","position:absolute;overflow:hidden;display:table-cell;width:100%;vertical-align:middle;height:100%;z-order:auto;");
+		      vizParent.width = this.getWidth();
+		      vizParent.height = this.getHeight();
+		      qParent.appendChild(vizParent);
+		      var vizStyle = "#infovis div {position:absolute;overflow:hidden;font-size:11px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;}#infovis .content {background-color:#333;border:0px solid #111;} #infovis .head {color:white;background-color:#444;} #infovis .head.in-path {background-color:#655;} #infovis .body {background-color:black;} #infovis .leaf {color:white;background-color:#111;display:table-cell;vertical-align:middle;border:1px solid #000;} #infovis .over-leaf {border:1px solid #9FD4FF;} #infovis .over-content {background-color: #9FD4FF;} #infovis .over-head {background-color:#A4D9FF;color:black;} .tip {color: #fff;width: 139px;background-color: black;opacity:0.9;filter:alpha(opacity=90);font-size:10px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;padding:7px;} .album {width:100px;margin:3px;} input {font-size:10px;font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;}";
+		      vizStyle = vizStyle.replace(/infovis/gi,vizId);
+		      qx.html.StyleSheet.createElement(vizStyle);
+		      
+		      var tm = null;
+		      var config = {
+		          titleHeight: 15,
+		          animate: true,
+		          //The id of the treemap container
+		          injectInto: vizId,
+		          //Set the max. depth to be shown for a subtree
+		          levelsToShow: 1,
+		          offset:1,
+		          Events: {  
+		            enable: true,  
+		            onClick: function(node) {  
+		              if(node) tm.enter(node);  
+		            },  
+		            onRightClick: function() {  
+		              tm.out();  
+		            }  
+		          },  
+		          duration: 800,  
+		          //Enable tips  
+		          Tips: {  
+		            enable: true,  
+		            //add positioning offsets  
+		            offsetX: 20,  
+		            offsetY: 20,  
+		            //implement the onShow method to  
+		            //add content to the tooltip when a node  
+		            //is hovered  
+		            onShow: function(tip, node, isLeaf, domElement) {  
+		              var html = "<div class=\"tip-title\">" + node.name   
+		              + "</div><div class=\"tip-text\">";  
+		              var data = node.data;  
+		              if(data.playcount) {  
+		                html += "play count: " + data.playcount;  
+		              }  
+		              if(data.image) {  
+		                html += "<img src=\""+ data.image +"\" class=\"album\" />";  
+		              }  
+		              tip.innerHTML =  html;   
+		            }    
+		          },  
+		          //Add the name of the node in the correponding label  
+		          //This method is called once, on label creation.  
+		          onCreateLabel: function(domElement, node){  
+		            domElement.innerHTML = node.name;  
+		            var style = domElement.style;  
+		            style.display = '';  
+		            style.border = '1px solid transparent';  
+		            domElement.onmouseover = function() {  
+		              style.border = '1px solid #9FD4FF';  
+		            };  
+		            domElement.onmouseout = function() {  
+		              style.border = '1px solid transparent';  
+		            };  
+		          }  
+		      };
+		      
+		      if (this._type == 2) {
+		        tm = new $jit.TM.Strip(config);
+		      }
+		      else if (this._type == 1) {
+		        tm = new $jit.TM.Squarified(config);
+		      }
+		      else {
+		        tm = new $jit.TM.SliceAndDice(config);
+		      }
+		      
 //				tm.onLeftClick = function(elem) {
 //			        this.enter(elem);
 //			        var node = elem;
@@ -190,31 +168,37 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.TreeMap",
 //		        	req.send();
 //			        
 //			    };
-				
-			    this.addEventListener("changeWidth", function(e) {
-					vizParent.width = this.getWidth();
-					qx.client.Timer.once(function() {
-						parent.refreshData();
-					},this,100);
-				});
-				this.addEventListener("changeHeight", function(e) {
-					vizParent.height = this.getHeight();
-					qx.client.Timer.once(function() {
-						parent.refreshData();
-					},this,100);
-				});
-			    
-				this._viz = tm;
-				this._vizParent = vizParent;
-				//This is a hack to ensure that a refresh is called after the style tag above is 
-				//initialized
-				qx.client.Timer.once(function() {
-					this.refreshData();
-				},this,100);
-			}
+		      
+		      this.addEventListener("changeWidth", function(e) {
+		        vizParent.width = this.getWidth();
+		        if (vizParent.height != null && vizParent.width != null) {
+  		        tm.canvas.resize(vizParent.width, vizParent.height);
+//  		        qx.client.Timer.once(function() {
+//  		          parent.refreshData();
+//  		        },this,100);
+		        }
+		      });
+		      this.addEventListener("changeHeight", function(e) {
+		        vizParent.height = this.getHeight();
+		        if (vizParent.height != null && vizParent.width != null) {
+  		        tm.canvas.resize(vizParent.width, vizParent.height);
+//  		        qx.client.Timer.once(function() {
+//  		          parent.refreshData();
+//  		        },this,100);
+		        }
+		      });
+		      
+		      this._viz = tm;
+		      this._vizParent = vizParent;
+		      //This is a hack to ensure that a refresh is called after the style tag above is 
+		      //initialized
+//		      qx.client.Timer.once(function() {
+//		        this.refreshData();
+//		      },this,100);
+		    }
 		  }
 		  catch (e) {
-			 this.info(e);
+		    this.info(e);
 		  }
 		},
 		
@@ -231,7 +215,6 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.TreeMap",
 					if (data != null) {
 						this.info("Loading treemap data.");
 						tm.loadJSON(data);
-						this.info("Refreshing treemap.");
 					}
 				}
 			}
