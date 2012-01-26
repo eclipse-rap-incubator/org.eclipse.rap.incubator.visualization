@@ -18,7 +18,7 @@
     <groupId>org.eclipse.rap.incubator</groupId>
     <artifactId>org.eclipse.rap.incubator-parent</artifactId>
     <version>1.5.0-SNAPSHOT</version>
-    <relativePath>../../../releng/org.eclipse.rap.incubator.releng/pom.xml</relativePath>
+    <relativePath>../../releng/org.eclipse.rap.incubator.releng/pom.xml</relativePath>
   </parent>
 
   <artifactId>org.eclipse.rap.rwt.visualization.jit</artifactId>
