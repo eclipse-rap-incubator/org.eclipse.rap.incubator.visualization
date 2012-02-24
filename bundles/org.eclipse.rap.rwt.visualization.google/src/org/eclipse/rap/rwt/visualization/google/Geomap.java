@@ -83,8 +83,7 @@ public class Geomap extends VisualizationWidget {
   public Geomap( final Composite parent, final int style ) {
     super( parent, style );
   }
-  
-  @Override
+
   public String getGoogleAPI() {
     return GEOMAP_API;
   }

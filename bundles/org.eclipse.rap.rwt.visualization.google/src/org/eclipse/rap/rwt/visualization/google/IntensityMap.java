@@ -83,7 +83,6 @@ public class IntensityMap extends VisualizationWidget {
     super( parent, style );
   }
   
-  @Override
   public String getGoogleAPI() {
     return INTENSITY_MAP_API;
   }

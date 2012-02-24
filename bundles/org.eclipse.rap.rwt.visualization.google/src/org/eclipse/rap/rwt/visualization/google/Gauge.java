@@ -80,7 +80,6 @@ public class Gauge extends VisualizationWidget {
     super( parent, style );
   }
   
-  @Override
   public String getGoogleAPI() {
     return GAUGE_API;
   }
