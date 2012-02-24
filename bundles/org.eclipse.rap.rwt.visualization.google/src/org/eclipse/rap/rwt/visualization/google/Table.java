@@ -56,6 +56,8 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class Table extends VisualizationWidget {
 
+  public static final String TABLE_API = "table";
+
   /**
    * Constructs a table widget in the specified parent and style. 
    * A visualization widget by default will auto-resize to fill its parent.
@@ -82,4 +84,8 @@ public class Table extends VisualizationWidget {
     super( parent, style );
   }
 
+  @Override
+  public String getGoogleAPI() {
+    return TABLE_API;
+  }
 }

@@ -52,6 +52,8 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class Gauge extends VisualizationWidget {
 
+  public static final String GAUGE_API = "gauge";
+
   /**
    * Constructs a gauge widget in the specified parent and style. 
    * A visualization widget by default will auto-resize to fill its parent.
@@ -76,6 +78,11 @@ public class Gauge extends VisualizationWidget {
    */
   public Gauge( final Composite parent, final int style ) {
     super( parent, style );
+  }
+  
+  @Override
+  public String getGoogleAPI() {
+    return GAUGE_API;
   }
 
 }

@@ -57,6 +57,8 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class AnnotatedTimeLine extends VisualizationWidget {
 
+  public static final String ANNOTATED_TIMELINE_API = "annotatedtimeline";
+
   /**
    * Constructs an annotated timeline widget in the specified parent and style. 
    * A visualization widget by default will auto-resize to fill its parent.
@@ -81,6 +83,11 @@ public class AnnotatedTimeLine extends VisualizationWidget {
    */
   public AnnotatedTimeLine( Composite parent, int style ) {
     super( parent, style );
+  }
+  
+  @Override
+  public String getGoogleAPI () {
+    return ANNOTATED_TIMELINE_API;
   }
   
 }

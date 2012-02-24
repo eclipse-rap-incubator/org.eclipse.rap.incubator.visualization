@@ -56,6 +56,8 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class Geomap extends VisualizationWidget {
 
+  public static final String GEOMAP_API = "geomap";
+
   /**
    * Constructs a geomap widget in the specified parent and style. 
    * A visualization widget by default will auto-resize to fill its parent.
@@ -80,6 +82,11 @@ public class Geomap extends VisualizationWidget {
    */
   public Geomap( final Composite parent, final int style ) {
     super( parent, style );
+  }
+  
+  @Override
+  public String getGoogleAPI() {
+    return GEOMAP_API;
   }
 
 }

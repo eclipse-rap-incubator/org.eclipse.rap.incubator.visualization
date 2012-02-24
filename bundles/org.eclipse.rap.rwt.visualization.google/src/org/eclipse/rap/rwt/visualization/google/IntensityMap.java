@@ -55,6 +55,8 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class IntensityMap extends VisualizationWidget {
 
+  public static final String INTENSITY_MAP_API = "intensitymap";
+
   /**
    * Constructs an intensity map widget in the specified parent and style. 
    * A visualization widget by default will auto-resize to fill its parent.
@@ -79,6 +81,11 @@ public class IntensityMap extends VisualizationWidget {
    */
   public IntensityMap( final Composite parent, final int style ) {
     super( parent, style );
+  }
+  
+  @Override
+  public String getGoogleAPI() {
+    return INTENSITY_MAP_API;
   }
 
 }

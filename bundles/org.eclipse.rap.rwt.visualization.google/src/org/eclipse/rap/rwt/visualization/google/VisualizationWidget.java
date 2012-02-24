@@ -26,6 +26,8 @@ import org.eclipse.swt.widgets.Layout;
  */
 public abstract class VisualizationWidget extends Composite {
   
+  public static final String CORE_CHART_API = "corechart";
+  
   private String widgetData = "";
   String widgetOptions = "";
   String widgetSize = "";
@@ -60,6 +62,14 @@ public abstract class VisualizationWidget extends Composite {
           redraw();
       }
     });
+  }
+  
+  /**
+   * Gets the google api that backs this chart.
+   * @return a string identifier that is the google visualization api
+   */
+  public String getGoogleAPI () {
+    return CORE_CHART_API;
   }
 
   /**

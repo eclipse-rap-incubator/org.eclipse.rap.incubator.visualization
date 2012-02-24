@@ -63,6 +63,7 @@ import org.eclipse.swt.widgets.Composite;
  */
 public class MotionChart extends VisualizationWidget {
 
+  public static final String MOTION_CHART_API = "motionchart";
   protected Set listeners;
   
   /**
@@ -89,6 +90,11 @@ public class MotionChart extends VisualizationWidget {
    */
   public MotionChart( Composite parent, int style ) {
     super( parent, style );
+  }
+  
+  @Override
+  public String getGoogleAPI() {
+    return MOTION_CHART_API;
   }
   
   /**
