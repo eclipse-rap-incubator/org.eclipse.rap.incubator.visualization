@@ -11,10 +11,10 @@
  *        added fault tolerance for offline situations
  ******************************************************************************/
 try {
-	google.load("visualization", "1", {packages:["piechart"]});
+	google.load('visualization', '1.0', {'packages':['corechart']});
 }
 catch (e) {
-	var mesg = "Error loading Google Pie Chart API: "+e;
+	var mesg = "Error loading Google Core Chart API: "+e;
 	if (console) {
 		console.log(mesg);
 	}

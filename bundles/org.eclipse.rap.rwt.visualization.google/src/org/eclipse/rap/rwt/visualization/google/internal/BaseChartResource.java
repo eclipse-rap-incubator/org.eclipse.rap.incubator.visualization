@@ -8,14 +8,14 @@
  * Contributors:
  *     David Donahue - initial API, implementation and documentation
  ******************************************************************************/
-package org.eclipse.rap.rwt.visualization.google.internal.linechartkit;
+package org.eclipse.rap.rwt.visualization.google.internal;
 
 import org.eclipse.rap.rwt.visualization.google.internal.GoogleVisualizationResource;
 
-public class LineChartAPIResource extends GoogleVisualizationResource {
-
+public class BaseChartResource extends GoogleVisualizationResource {
+  
   public String getLocation() {
-    return "org/eclipse/rap/rwt/visualization/google/internal/linechartkit/LineChartAPI.js";
+    return "org/eclipse/rap/rwt/visualization/google/internal/BaseChart.js";
   }
   
 }

@@ -8,14 +8,14 @@
  * Contributors:
  *     David Donahue - initial API, implementation and documentation
  ******************************************************************************/
-package org.eclipse.rap.rwt.visualization.google.internal.columnchartkit;
+package org.eclipse.rap.rwt.visualization.google.internal;
 
 import org.eclipse.rap.rwt.visualization.google.internal.GoogleVisualizationResource;
 
-public class ColumnChartAPIResource extends GoogleVisualizationResource {
+public class CoreChartAPIResource extends GoogleVisualizationResource {
 
   public String getLocation() {
-    return "org/eclipse/rap/rwt/visualization/google/internal/columnchartkit/ColumnChartAPI.js";
+    return "org/eclipse/rap/rwt/visualization/google/internal/CoreChartAPI.js";
   }
   
 }
