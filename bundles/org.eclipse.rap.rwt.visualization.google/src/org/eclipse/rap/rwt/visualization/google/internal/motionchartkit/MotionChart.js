@@ -34,9 +34,6 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.MotionChart", {
     },
     
     destruct : function() {
-    	if (this._chart != null) {
-    		this._chart.dispose();
-    	}
     },
     
     properties : {
