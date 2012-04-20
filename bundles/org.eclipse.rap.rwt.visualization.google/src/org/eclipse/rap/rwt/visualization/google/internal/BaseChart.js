@@ -113,37 +113,34 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.BaseChart", {
         initialize : function() {
         	var chart = this._chart; 
         	if (chart == null) {
-	    		this.info("Creating new chart instance.");
-	    		this._chart = this._createChart(this._getTargetNode());
-	    		chart = this._chart;
-	            var qParent = this;
-	            google.visualization.events.addListener(chart, 'ready', function() {
-	            	qParent.inited = true;
-	            });
-	            var dataTable = qParent._dataTable;
-	            google.visualization.events.addListener(chart, 'select', function() {
-	            	var wm = org.eclipse.swt.WidgetManager.getInstance();
-	                var widgetId = wm.findIdByWidget(qParent);
-	            	qParent.info(widgetId+" - Sending selection event");
-	            	var selArray = chart.getSelection();
-	            	var selObj = selArray[0];
-	            	var selection = dataTable.getValue(selObj.row, 0) + "," + dataTable.getColumnId(selObj.column) + "," + dataTable.getValue(selObj.row, selObj.column);
-	            	this.selectedItem = selection;
-	            	this.selectedRow = dataTable.getValue(selObj.row, 0);
-	            	this.selectedColumn = dataTable.getColumnId(selObj.column);
-	            	this.selectedValue = dataTable.getValue(selObj.row, selObj.column);
-                    
-	            	//fire selection event
-	            	var req = org.eclipse.swt.Request.getInstance();
-	            	req.addParameter(widgetId + ".selectedItem", this.selectedItem);
-	            	req.addParameter(widgetId + ".selectedRow", this.selectedRow);
-	            	req.addParameter(widgetId + ".selectedColumn", this.selectedColumn);
-	            	req.addParameter(widgetId + ".selectedValue", this.selectedValue);
-	            	req.addEvent( "org.eclipse.swt.events.widgetSelected", widgetId );
-	            	req.send();
-		        });
-	            
-	            this.info("Created new chart instance.");
+        	  this.info("Creating new chart instance.");
+        	  this._chart = this._createChart(this._getTargetNode());
+        	  chart = this._chart;
+        	  var qParent = this;
+        	  var dataTable = qParent._dataTable;
+        	  google.visualization.events.addListener(chart, 'select', function() {
+        	    var wm = org.eclipse.swt.WidgetManager.getInstance();
+        	    var widgetId = wm.findIdByWidget(qParent);
+        	    qParent.info(widgetId+" - Sending selection event");
+        	    var selArray = chart.getSelection();
+        	    var selObj = selArray[0];
+        	    var selection = dataTable.getValue(selObj.row, 0) + "," + dataTable.getColumnId(selObj.column) + "," + dataTable.getValue(selObj.row, selObj.column);
+        	    this.selectedItem = selection;
+        	    this.selectedRow = dataTable.getValue(selObj.row, 0);
+        	    this.selectedColumn = dataTable.getColumnId(selObj.column);
+        	    this.selectedValue = dataTable.getValue(selObj.row, selObj.column);
+        	    
+        	    //fire selection event
+        	    var req = org.eclipse.swt.Request.getInstance();
+        	    req.addParameter(widgetId + ".selectedItem", this.selectedItem);
+        	    req.addParameter(widgetId + ".selectedRow", this.selectedRow);
+        	    req.addParameter(widgetId + ".selectedColumn", this.selectedColumn);
+        	    req.addParameter(widgetId + ".selectedValue", this.selectedValue);
+        	    req.addEvent( "org.eclipse.swt.events.widgetSelected", widgetId );
+        	    req.send();
+        	  });
+        	  
+        	  this.info("Created new chart instance.");
         	}
         },
         
@@ -174,17 +171,19 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.BaseChart", {
         },
         
         redraw : function () {
-        	try {
-        		this.initialize();
-	        	this.info("Attempting to redraw: "+this._dataTable+", "+this._options);
-	        	if (this._chart && this._dataTable && this._options) {
-	        		this.info("Drawing: "+this._options);
-	        		this._chart.draw(this._dataTable, this._options);
-	        	}
-        	}
-        	catch (err) {
-        		this.info(err);
-        	}
+          qx.client.Timer.once( function() {
+            try {
+              this.initialize();
+              this.info("Attempting to redraw: "+this._dataTable+", "+this._options);
+              if (this._chart && this._dataTable && this._options) {
+                this.info("Drawing: "+this._options);
+                this._chart.draw(this._dataTable, this._options);
+              }
+            }
+            catch (err) {
+              this.info(err);
+            }
+          }, this, 0 );
         },
 
         _sendResponse : function(widget, field, value) {
