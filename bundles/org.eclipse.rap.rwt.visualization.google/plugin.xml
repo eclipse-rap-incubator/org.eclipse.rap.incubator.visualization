@@ -9,12 +9,10 @@
     <resource class="org.eclipse.rap.rwt.visualization.google.internal.CoreChartAPIResource"/>
     <resource class="org.eclipse.rap.rwt.visualization.google.internal.BaseChartResource"/>
     
-    <resource class="org.eclipse.rap.rwt.visualization.google.internal.motionchartkit.MotionChartAPIResource"/>
     <resource class="org.eclipse.rap.rwt.visualization.google.internal.motionchartkit.MotionChartResource"/>
     
     <resource class="org.eclipse.rap.rwt.visualization.google.internal.columnchartkit.ColumnChartResource"/>
     
-    <resource class="org.eclipse.rap.rwt.visualization.google.internal.tablekit.TableAPIResource"/>
     <resource class="org.eclipse.rap.rwt.visualization.google.internal.tablekit.TableResource"/>
     
     <resource class="org.eclipse.rap.rwt.visualization.google.internal.scatterchartkit.ScatterChartResource"/>
@@ -23,18 +21,14 @@
     
     <resource class="org.eclipse.rap.rwt.visualization.google.internal.piechartkit.PieChartResource"/>
     
-    <resource class="org.eclipse.rap.rwt.visualization.google.internal.annotatedtimelinekit.AnnotatedTimeLineAPIResource"/>
     <resource class="org.eclipse.rap.rwt.visualization.google.internal.annotatedtimelinekit.AnnotatedTimeLineResource"/>
     
     <resource class="org.eclipse.rap.rwt.visualization.google.internal.barchartkit.BarChartResource"/>
     
-    <resource class="org.eclipse.rap.rwt.visualization.google.internal.gaugekit.GaugeAPIResource"/>
     <resource class="org.eclipse.rap.rwt.visualization.google.internal.gaugekit.GaugeResource"/>
     
-    <resource class="org.eclipse.rap.rwt.visualization.google.internal.geomapkit.GeomapAPIResource"/>
     <resource class="org.eclipse.rap.rwt.visualization.google.internal.geomapkit.GeomapResource"/>
     
-    <resource class="org.eclipse.rap.rwt.visualization.google.internal.intensitymapkit.IntensityMapAPIResource"/>
     <resource class="org.eclipse.rap.rwt.visualization.google.internal.intensitymapkit.IntensityMapResource"/>
     
     <resource class="org.eclipse.rap.rwt.visualization.google.internal.areachartkit.AreaChartResource"/>

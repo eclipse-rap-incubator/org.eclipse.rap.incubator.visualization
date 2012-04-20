@@ -10,138 +10,32 @@
  *     Austin Riddle - improvements to widget hierarchy and data flow for 
  *                     consistency with SWT behavior.
  ******************************************************************************/
+try {
+	google.load('visualization', '1', {'packages':['table']});
+}
+catch (e) {
+	var mesg = "Error loading Google Table API: "+e;
+	if (console) {
+		console.log(mesg);
+	}
+	else {
+		alert(mesg);
+	}
+}
+
 qx.Class.define( "org.eclipse.rap.rwt.visualization.google.Table", {
-    extend: qx.ui.layout.CanvasLayout,
-    
-    construct: function( id ) {
-        this.base( arguments );
-        this.setHtmlAttribute( "id", id );
-        this._id = id;
-        this._chart = null;
-        this._dataTable = null;
-        this._options = {};
-    },
-    
-    properties : {
-        widgetData : {
-            init : "",
-            apply : "refreshWidgetData"
-        },
-        widgetOptions : {
-            init : "",
-            apply : "refreshWidgetOptions"
-        },
-        selectedItem : {
-        	init : "",
-            apply : ""
-        },
-        selectedRow : {
-        	init : "",
-            apply : ""
-        },
-        selectedColumn : {
-        	init : "",
-            apply : ""
-        },
-        selectedValue : {
-        	init : "",
-            apply : ""
-        }
-    },
+    extend: org.eclipse.rap.rwt.visualization.google.BaseChart,
     
     members : {
-        _doActivate : function() {
-            var shell = null;
-            var parent = this.getParent();
-            while( shell == null && parent != null ) {
-                if( parent.classname == "org.eclipse.swt.widgets.Shell" ) {
-                    shell = parent;
-                }
-                parent = parent.getParent();
-            }
-            if( shell != null ) {
-                shell.setActiveChild( this );
-            }
-        },
+      
+      _createChart : function(domElement) {
+        return new google.visualization.Table(domElement);
+      }
         
-        _initChart : function() {
-        	qx.ui.core.Widget.flushGlobalQueues();
-        	var chart = this._chart; 
-        	if (chart == null) {
-        		this.info("Creating new table instance.");
-        		this._chart = new google.visualization.Table(document.getElementById(this._id));
-        		chart = this._chart;
-        		var qParent = this;
-        		google.visualization.events.addListener(this._chart, 'ready', function() {
-        		  qParent.info("Chart is ready.");
-        			qParent.inited = true;
-        		});
-        		var widgetId = this._id;
-        		var dataTable = qParent._dataTable;
-        		google.visualization.events.addListener(chart, 'select', function() {
-                	var row = chart.getSelection()[0].row;
-                	this.selectedItem = dataTable.getValue(row, 0);
-                	this.selectedRow = dataTable.getValue(row, 0);
-                	//fire selection event
-                	var req = org.eclipse.swt.Request.getInstance();
-                	req.addParameter(widgetId + ".selectedItem", this.selectedItem);
-                	req.addParameter(widgetId + ".selectedRow", this.selectedRow);
-                	req.addEvent( "org.eclipse.swt.events.widgetSelected", widgetId );
-                	req.send();
-    	        });
-        		this.info("Created new table instance.");
-        	}
-        },
-        
-        refreshWidgetData : function() {
-        	try {
-	        	var data = eval('(' + this.getWidgetData() + ')');
-	            this._dataTable = new google.visualization.DataTable(data);
-	            this.info("Setting data set to : "+this._dataTable);
-        	}
-        	catch (err) {
-        		this.info("Attempted to set data but failed.");
-        		this.info(err);
-        	}
-        },
-        
-        refreshWidgetOptions : function() {
-        	try {
-	        	qx.ui.core.Widget.flushGlobalQueues();
-	        	var opString = this.getWidgetOptions();
-	        	opString = opString.replace(new RegExp("~","g"), "\"");
-	        	var evalStr = "({" + opString;
-	        	evalStr = evalStr + "})";
-	        	this._options = eval(evalStr);
-        	}
-        	catch (err) {
-        		this.info(err);
-        	}
-        },
-        
-        redraw : function () {
-        	try {
-	        	this._initChart();
-	        	this.info("Attempting to draw: "+this._dataTable+", "+this._options);
-	        	if (this._chart && this._dataTable && this._options) {
-	        		this.info("Drawing: "+this._options);
-	        		this._chart.draw(this._dataTable, this._options);
-	        	}
-        	}
-        	catch (err) {
-        		this.info(err);
-        	}
-        },
-
-        _sendResponse : function(widget, field, value) {
-			//if (!org.eclipse.swt.EventUtil.getSuspended()) {
-				var wm = org.eclipse.swt.WidgetManager.getInstance();
-				var canvasId = wm.findIdByWidget(widget);
-				var req = org.eclipse.swt.Request.getInstance();
-				req.addParameter(canvasId + "." + field, value);
-				req.send();
-			//}
-		}
     }
     
 } );
+
+org.eclipse.rap.rwt.visualization.google.BaseChart.registerAdapter(
+		"org.eclipse.rap.rwt.visualization.google.Table",
+		org.eclipse.rap.rwt.visualization.google.Table);

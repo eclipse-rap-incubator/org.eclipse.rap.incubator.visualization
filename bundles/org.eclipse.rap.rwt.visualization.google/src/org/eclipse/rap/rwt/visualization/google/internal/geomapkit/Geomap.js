@@ -10,16 +10,33 @@
  *     Austin Riddle - improvements to widget hierarchy and data flow for 
  *                     consistency with SWT behavior.
  ******************************************************************************/
+try {
+	google.load('visualization', '1', {'packages':['geomap']});
+}
+catch (e) {
+	var mesg = "Error loading Google Geomap API: "+e;
+	if (console) {
+		console.log(mesg);
+	}
+	else {
+		alert(mesg);
+	}
+}
+
 qx.Class.define( "org.eclipse.rap.rwt.visualization.google.Geomap", {
     extend: qx.ui.layout.CanvasLayout,
     
-    construct: function( id ) {
+    construct: function() {
         this.base( arguments );
-        this.setHtmlAttribute( "id", id );
-        this._id = id;
         this._chart = null;
         this._dataTable = null;
         this._options = {};
+    },
+    
+    destruct : function() {
+    	if (this._chart != null) {
+    		this._chart.dispose();
+    	}
     },
     
     properties : {
@@ -60,19 +77,20 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.Geomap", {
             }
         },
         
-        _initChart : function() {
+        initialize : function() {
         	var chart = this._chart; 
         	if (chart == null) {
 	    		this.info("Creating new geomap instance.");
-	    		this._chart = new google.visualization.GeoMap(document.getElementById(this._id));
+	    		this._chart = new google.visualization.GeoMap(this._getTargetNode());
 	    		chart = this._chart;
 	            var qParent = this;
 	            google.visualization.events.addListener(chart, 'ready', function() {
 	            	qParent.inited = true;
 	            });
-	            var widgetId = this._id;
 	            var dataTable = qParent._dataTable;
 	            google.visualization.events.addListener(chart, 'regionClick', function(clickedObj) {
+  	                var wm = org.eclipse.swt.WidgetManager.getInstance();
+	                var widgetId = wm.findIdByWidget(qParent);
 	            	var selObj = chart.getSelection();
 //	            	var selection = selObj.region;
 	            	var selection = clickedObj.region;
@@ -117,7 +135,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.Geomap", {
         
         redraw : function () {
         	try {
-	        	this._initChart();
+        		this.initialize();
 	        	this.info("Attempting to redraw: "+this._dataTable+", "+this._options);
 	        	if (this._chart && this._dataTable && this._options) {
 	        		this.info("Drawing: "+this._options);
@@ -141,3 +159,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.Geomap", {
     }
     
 } );
+
+org.eclipse.rap.rwt.visualization.google.BaseChart.registerAdapter(
+		"org.eclipse.rap.rwt.visualization.google.Geomap",
+		org.eclipse.rap.rwt.visualization.google.Geomap);

@@ -39,5 +39,5 @@
 <booleanAttribute key="tracing" value="false"/>
 <booleanAttribute key="useCustomFeatures" value="false"/>
 <booleanAttribute key="useDefaultConfigArea" value="true"/>
-<stringAttribute key="workspace_bundles" value="org.eclipse.rap.jface.databinding@default:default,org.eclipse.rap.jface@default:default,org.eclipse.rap.rwt.excanvas@default:default,org.eclipse.rap.rwt.osgi@default:default,org.eclipse.rap.rwt.visualization.google.demo@default:default,org.eclipse.rap.rwt.visualization.google@default:default,org.eclipse.rap.rwt@default:default,org.eclipse.rap.ui.workbench@default:default,org.eclipse.rap.ui@default:default,org.json@default:default"/>
+<stringAttribute key="workspace_bundles" value="org.eclipse.rap.jettycustomizer@default:default,org.eclipse.rap.jface.databinding@default:default,org.eclipse.rap.jface@default:default,org.eclipse.rap.rwt.excanvas@default:default,org.eclipse.rap.rwt.osgi@default:default,org.eclipse.rap.rwt.visualization.google.demo@default:default,org.eclipse.rap.rwt.visualization.google@default:default,org.eclipse.rap.rwt@default:default,org.eclipse.rap.ui.workbench@default:default,org.eclipse.rap.ui@default:default,org.json@default:default"/>
 </launchConfiguration>

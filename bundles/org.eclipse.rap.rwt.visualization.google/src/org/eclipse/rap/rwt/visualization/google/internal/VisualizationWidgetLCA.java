@@ -15,6 +15,8 @@ package org.eclipse.rap.rwt.visualization.google.internal;
 import java.io.IOException;
 
 import org.eclipse.rap.rwt.visualization.google.VisualizationWidget;
+import org.eclipse.rwt.internal.protocol.ClientObjectFactory;
+import org.eclipse.rwt.internal.protocol.IClientObject;
 import org.eclipse.rwt.lifecycle.AbstractWidgetLCA;
 import org.eclipse.rwt.lifecycle.ControlLCAUtil;
 import org.eclipse.rwt.lifecycle.IWidgetAdapter;
@@ -40,55 +42,55 @@ public abstract class VisualizationWidgetLCA extends AbstractWidgetLCA {
   protected static final String REDRAW_FUNC = "redraw";
   protected static final String PROP_DATA = "widgetData";
   protected static final String PROP_OPTIONS = "widgetOptions";
-
+  
+  private static final String[] ALLOWED_STYLES = new String[] { "BORDER" };
+  
   public abstract Class getWidgetType();
   
   public void renderInitialization( final Widget widget ) throws IOException {
-     JSWriter writer = JSWriter.getWriterFor( widget );
-     String id = WidgetUtil.getId( widget );
-     writer.newWidget( getWidgetType().getName(), new Object[]{
-       id
-     } );
-     writer.set( "appearance", "composite" );
-     writer.set( "overflow", "hidden" );
-     ControlLCAUtil.writeStyleFlags( ( Control ) widget );
+    Control control = (Control)widget;
+    IClientObject clientObject = ClientObjectFactory.getClientObject( control );
+    clientObject.create( getWidgetType().getCanonicalName() );
+//    clientObject.set( "id", WidgetUtil.getId( control ) );
+    clientObject.set( "parent", WidgetUtil.getId( control.getParent() ) );
+    clientObject.set( "style", WidgetLCAUtil.getStyles( control, ALLOWED_STYLES ) );
    }
   
   public void preserveValues( final Widget widget ) {
+    ControlLCAUtil.preserveValues( (Control)widget );
+    WidgetLCAUtil.preserveCustomVariant( widget );
     ControlLCAUtil.preserveValues( ( Control )widget );
     IWidgetAdapter adapter = WidgetUtil.getAdapter( widget );
     adapter.preserve( PROP_OPTIONS, ( ( VisualizationWidget )widget ).getWidgetOptions() );
     adapter.preserve( PROP_DATA, ( ( VisualizationWidget )widget ).getWidgetData() );
-    // only needed for custom variants (theming)
-//    WidgetLCAUtil.preserveCustomVariant( widget );
   }
 
   public void renderChanges( final Widget widget ) throws IOException {
+    ControlLCAUtil.renderChanges( ( Control )widget );
+    WidgetLCAUtil.renderCustomVariant( widget );
+    
     VisualizationWidget vWidget = ( VisualizationWidget )widget;
-    ControlLCAUtil.writeChanges( vWidget );
-    JSWriter writer = JSWriter.getWriterFor( vWidget );
-    writer.set( PROP_OPTIONS, PROP_OPTIONS, vWidget.getWidgetOptions() );
-    writer.set( PROP_DATA, PROP_DATA, vWidget.getWidgetData() );
+    IClientObject clientObject = ClientObjectFactory.getClientObject( vWidget );
+    IWidgetAdapter adapter = WidgetUtil.getAdapter(widget);
+    boolean changed = !adapter.isInitialized() || WidgetLCAUtil.hasChanged(widget, PROP_OPTIONS, vWidget.getWidgetOptions());
+    if (changed) {
+      clientObject.set(PROP_OPTIONS, vWidget.getWidgetOptions());
+    }
+    changed = WidgetLCAUtil.hasChanged(widget, PROP_DATA, vWidget.getWidgetData());
+    if (changed) {
+      clientObject.set(PROP_DATA, vWidget.getWidgetData());
+    }
+    
     if (vWidget.isDirty()) {
-      writer.call( REDRAW_FUNC, null );
+      clientObject.call(REDRAW_FUNC, null);
       vWidget.setDirty(false);
     }
   }
 
   public void renderDispose( final Widget widget ) throws IOException {
-    JSWriter writer = JSWriter.getWriterFor( widget );
-    writer.dispose();
+    ClientObjectFactory.getClientObject( widget ).destroy();
   }
 
-  public void createResetHandlerCalls( String typePoolId ) throws IOException {
-     //preserved empty here for pre RAP 1.3 compatibility
-  }
-
-  public String getTypePoolId( Widget widget ) {
-   //preserved empty here for pre RAP 1.3 compatibility
-    return null;
-  }
-  
   /**
    * Respond to selection events, set the value of selectedItem on the widget Java object,
    * and broadcast a SWT.Selection event to any listeners  

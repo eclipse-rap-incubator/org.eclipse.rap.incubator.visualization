@@ -10,17 +10,61 @@
  *     Austin Riddle - improvements to widget hierarchy and data flow for 
  *                     consistency with SWT behavior.
  ******************************************************************************/
+//The reason this is still a qooxdoo widget is because google embeds the chart in an iframe. 
 qx.Class.define( "org.eclipse.rap.rwt.visualization.google.BaseChart", {
     type: "abstract",
     extend: qx.ui.layout.CanvasLayout,
     
-    construct: function( id ) {
+    statics : 
+    { 
+      registerAdapter : function(className, constructor) {
+    	  org.eclipse.rwt.protocol.AdapterRegistry.add( className, {
+
+    		  factory : function( properties ) {
+    		    var result = new constructor();
+    		    org.eclipse.rwt.protocol.AdapterUtil.addStatesForStyles( result, properties.style );
+    		    result.setUserData( "isControl", true );
+    		    org.eclipse.rwt.protocol.AdapterUtil.setParent( result, properties.parent );
+    		    return result;
+    		  },
+    		  
+    		  destructor : org.eclipse.rwt.protocol.AdapterUtil.getControlDestructor(),
+
+    		  properties : org.eclipse.rwt.protocol.AdapterUtil.extendControlProperties( [
+    		    "widgetData",
+    		    "widgetOptions",
+    		  ] ),
+
+    		  propertyHandler : org.eclipse.rwt.protocol.AdapterUtil.extendControlPropertyHandler( {} ),   
+
+    		  listeners : org.eclipse.rwt.protocol.AdapterUtil.extendControlListeners( [] ),
+
+    		  listenerHandler : org.eclipse.rwt.protocol.AdapterUtil.extendControlListenerHandler( {} ),
+
+    		  methods : [
+    		    "redraw"
+    		  ],
+    		  
+    		  methodHandler : {
+    		    "redraw" : function( widget, args ) {
+    		      widget.redraw();
+    		    }
+    		  }
+          } );
+      }
+    },
+    
+    construct: function() {
         this.base( arguments );
-        this.setHtmlAttribute( "id", id );
-        this._id = id;
         this._chart = null;
         this._dataTable = null;
         this._options = {};
+    },
+    
+    destruct : function() {
+    	if (this._chart != null) {
+    		this._chart.dispose();
+    	}
     },
     
     properties : {
@@ -69,19 +113,20 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.BaseChart", {
           
         },
         
-        _initChart : function() {
+        initialize : function() {
         	var chart = this._chart; 
         	if (chart == null) {
 	    		this.info("Creating new chart instance.");
-	    		this._chart = this._createChart(document.getElementById(this._id));
+	    		this._chart = this._createChart(this._getTargetNode());
 	    		chart = this._chart;
 	            var qParent = this;
 	            google.visualization.events.addListener(chart, 'ready', function() {
 	            	qParent.inited = true;
 	            });
-	            var widgetId = this._id;
 	            var dataTable = qParent._dataTable;
 	            google.visualization.events.addListener(chart, 'select', function() {
+	            	var wm = org.eclipse.swt.WidgetManager.getInstance();
+	                var widgetId = wm.findIdByWidget(qParent);
 	            	qParent.info(widgetId+" - Sending selection event");
 	            	var selArray = chart.getSelection();
 	            	var selObj = selArray[0];
@@ -133,7 +178,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.BaseChart", {
         
         redraw : function () {
         	try {
-	        	this._initChart();
+        		this.initialize();
 	        	this.info("Attempting to redraw: "+this._dataTable+", "+this._options);
 	        	if (this._chart && this._dataTable && this._options) {
 	        		this.info("Drawing: "+this._options);

@@ -10,16 +10,33 @@
  *     Austin Riddle - improvements to widget hierarchy and data flow for 
  *                     consistency with SWT behavior.
  ******************************************************************************/
+try {
+	google.load('visualization', '1', {'packages':['motionchart']});
+}
+catch (e) {
+	var mesg = "Error loading Google Motion Chart API: "+e;
+	if (console) {
+		console.log(mesg);
+	}
+	else {
+		alert(mesg);
+	}
+}
+
 qx.Class.define( "org.eclipse.rap.rwt.visualization.google.MotionChart", {
     extend: qx.ui.layout.CanvasLayout,
     
-    construct: function( id ) {
+    construct: function( ) {
         this.base( arguments );
-        this.setHtmlAttribute( "id", id );
-        this._id = id;
         this._chart = null;
         this._dataTable = null;
         this._options = {};
+    },
+    
+    destruct : function() {
+    	if (this._chart != null) {
+    		this._chart.dispose();
+    	}
     },
     
     properties : {
@@ -49,11 +66,11 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.MotionChart", {
             }
         },
     
-        _initChart : function() {
+        initialize : function() {
         	var chart = this._chart; 
         	if (chart == null) {
 	    		this.info("Creating new chart instance.");
-	    		this._chart = new google.visualization.MotionChart(document.getElementById(this._id));                    
+	    		this._chart = new google.visualization.MotionChart(this._getTargetNode());                    
 	            var qParent = this;
 	            google.visualization.events.addListener(this._chart, 'ready', function() {
 	            	qParent.inited = true;
@@ -96,7 +113,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.MotionChart", {
         
         redraw : function () {
         	try {
-	        	this._initChart();
+	        	this.initialize();
 	        	this.info("Attempting to redraw: "+this._dataTable+", "+this._options);
 	        	if (this._chart && this._dataTable && this._options) {
 	        		this.info("Drawing: "+this._options);
@@ -120,3 +137,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.MotionChart", {
     }
     
 } );
+
+org.eclipse.rap.rwt.visualization.google.BaseChart.registerAdapter(
+		"org.eclipse.rap.rwt.visualization.google.MotionChart",
+		org.eclipse.rap.rwt.visualization.google.MotionChart);

@@ -22,3 +22,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.BarChart", {
     }
     
 } );
+
+org.eclipse.rap.rwt.visualization.google.BaseChart.registerAdapter(
+		"org.eclipse.rap.rwt.visualization.google.BarChart",
+		org.eclipse.rap.rwt.visualization.google.BarChart);

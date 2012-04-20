@@ -22,3 +22,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.AreaChart", {
     }
     
 } );
+
+org.eclipse.rap.rwt.visualization.google.BaseChart.registerAdapter(
+		"org.eclipse.rap.rwt.visualization.google.AreaChart",
+		org.eclipse.rap.rwt.visualization.google.AreaChart);
