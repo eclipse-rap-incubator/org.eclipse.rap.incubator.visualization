@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+  <name>
+    Google Visualization
+  </name>
+  <maintainer>
+    Austin Riddle
+  </maintainer>
+  <description>
+    <p>
+      This component provides a simple integration of all of the
+      Google Visualization widgets as RAP custom widgets:
+      Motion Chart, Annotated Timeline, Area Chart, Bar Chart,
+      Column Chart, Gauge, Geomap, Intensity Map, Line Chart,
+      Pie Chart, Scatter Chart, and Table.
+    </p>
+  </description>
+</component>
