@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.rap.incubator.visualization.feature"
+      id="org.eclipse.rap.visualization.feature"
       label="%featureName"
       version="1.5.0.qualifier"
       provider-name="%providerName">
