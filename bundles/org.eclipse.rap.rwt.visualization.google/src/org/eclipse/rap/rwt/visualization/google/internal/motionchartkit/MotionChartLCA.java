@@ -12,9 +12,9 @@
  ******************************************************************************/
 package org.eclipse.rap.rwt.visualization.google.internal.motionchartkit;
 
+import org.eclipse.rap.rwt.lifecycle.WidgetLCAUtil;
 import org.eclipse.rap.rwt.visualization.google.MotionChart;
 import org.eclipse.rap.rwt.visualization.google.internal.VisualizationWidgetLCA;
-import org.eclipse.rwt.lifecycle.WidgetLCAUtil;
 import org.eclipse.swt.widgets.Widget;
 
 public class MotionChartLCA extends VisualizationWidgetLCA {

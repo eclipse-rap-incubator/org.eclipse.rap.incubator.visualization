@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.rap.rwt.visualization.jit.internal;
 
-import org.eclipse.rwt.resources.IResource;
-import org.eclipse.rwt.resources.IResourceManager.RegisterOptions;
+import org.eclipse.rap.rwt.resources.IResource;
+import org.eclipse.rap.rwt.resources.IResourceManager.RegisterOptions;
 
 public abstract class JITVisualizationResource implements IResource {
 

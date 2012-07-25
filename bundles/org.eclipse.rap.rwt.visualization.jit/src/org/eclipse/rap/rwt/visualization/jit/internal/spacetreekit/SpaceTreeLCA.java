@@ -12,13 +12,8 @@
  ******************************************************************************/
 package org.eclipse.rap.rwt.visualization.jit.internal.spacetreekit;
 
-import java.io.IOException;
-
-import org.eclipse.rap.rwt.visualization.jit.JITGraphWidget;
 import org.eclipse.rap.rwt.visualization.jit.SpaceTree;
 import org.eclipse.rap.rwt.visualization.jit.internal.JITGraphLCA;
-import org.eclipse.rwt.lifecycle.JSWriter;
-import org.eclipse.swt.widgets.Widget;
 
 public class SpaceTreeLCA extends JITGraphLCA {
 

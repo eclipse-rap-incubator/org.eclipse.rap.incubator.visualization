@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright © 2010-2011 Austin Riddle
+ * Copyright ï¿½ 2010-2011 Austin Riddle
  * All Rights Reserved.
  * 
  * This program and the accompanying materials
@@ -13,8 +13,8 @@
  *****************************************************************************/
 package org.eclipse.rap.rwt.visualization.jit.internal;
 
-import org.eclipse.rwt.resources.IResource;
-import org.eclipse.rwt.resources.IResourceManager.RegisterOptions;
+import org.eclipse.rap.rwt.resources.IResource;
+import org.eclipse.rap.rwt.resources.IResourceManager.RegisterOptions;
 
 
 public class JITAPIResource implements IResource {

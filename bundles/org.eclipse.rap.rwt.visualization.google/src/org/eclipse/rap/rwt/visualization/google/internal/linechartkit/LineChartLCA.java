@@ -14,10 +14,10 @@ package org.eclipse.rap.rwt.visualization.google.internal.linechartkit;
 
 import java.io.IOException;
 
+import org.eclipse.rap.rwt.lifecycle.ControlLCAUtil;
+import org.eclipse.rap.rwt.lifecycle.JSWriter;
 import org.eclipse.rap.rwt.visualization.google.LineChart;
 import org.eclipse.rap.rwt.visualization.google.internal.VisualizationWidgetLCA;
-import org.eclipse.rwt.lifecycle.ControlLCAUtil;
-import org.eclipse.rwt.lifecycle.JSWriter;
 import org.eclipse.swt.widgets.Widget;
 
 public class LineChartLCA extends VisualizationWidgetLCA {

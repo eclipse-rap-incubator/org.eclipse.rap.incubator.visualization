@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright � 2010-2011 Texas Center for Applied Technology
+ * Copyright (C) 2010-2011 Texas Center for Applied Technology
  * Texas Engineering Experiment Station
  * The Texas A&M University System
  * All Rights Reserved.
@@ -22,12 +22,12 @@ import java.io.InputStreamReader;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.rap.rwt.lifecycle.IEntryPoint;
 import org.eclipse.rap.rwt.visualization.jit.HyperTree;
 import org.eclipse.rap.rwt.visualization.jit.JITVisualizationWidget;
 import org.eclipse.rap.rwt.visualization.jit.RGraph;
 import org.eclipse.rap.rwt.visualization.jit.SpaceTree;
 import org.eclipse.rap.rwt.visualization.jit.TreeMap;
-import org.eclipse.rwt.lifecycle.IEntryPoint;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionAdapter;

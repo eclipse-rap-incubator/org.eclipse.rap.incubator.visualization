@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.rap.rwt.visualization.google.internal;
 
-import org.eclipse.rwt.resources.IResource;
-import org.eclipse.rwt.resources.IResourceManager.RegisterOptions;
+import org.eclipse.rap.rwt.resources.IResource;
+import org.eclipse.rap.rwt.resources.IResourceManager.RegisterOptions;
 
 /**
  * <p>Base type for visualization resources.</p>

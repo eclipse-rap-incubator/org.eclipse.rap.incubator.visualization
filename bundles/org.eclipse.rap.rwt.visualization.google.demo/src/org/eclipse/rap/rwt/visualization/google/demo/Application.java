@@ -21,6 +21,7 @@ package org.eclipse.rap.rwt.visualization.google.demo;
 
 import java.util.Date;
 
+import org.eclipse.rap.rwt.lifecycle.IEntryPoint;
 import org.eclipse.rap.rwt.visualization.google.AnnotatedTimeLine;
 import org.eclipse.rap.rwt.visualization.google.AreaChart;
 import org.eclipse.rap.rwt.visualization.google.BarChart;
@@ -30,13 +31,12 @@ import org.eclipse.rap.rwt.visualization.google.Geomap;
 import org.eclipse.rap.rwt.visualization.google.IntensityMap;
 import org.eclipse.rap.rwt.visualization.google.LineChart;
 import org.eclipse.rap.rwt.visualization.google.MotionChart;
+import org.eclipse.rap.rwt.visualization.google.MotionChart.StateListener;
 import org.eclipse.rap.rwt.visualization.google.PieChart;
 import org.eclipse.rap.rwt.visualization.google.ScatterChart;
 import org.eclipse.rap.rwt.visualization.google.Table;
 import org.eclipse.rap.rwt.visualization.google.VisualizationWidget;
-import org.eclipse.rap.rwt.visualization.google.MotionChart.StateListener;
 import org.eclipse.rap.rwt.visualization.google.json.JSONGoogleDataTable;
-import org.eclipse.rwt.lifecycle.IEntryPoint;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
