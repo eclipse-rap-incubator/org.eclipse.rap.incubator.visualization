@@ -16,8 +16,9 @@ import org.eclipse.rap.rwt.visualization.google.PieChart;
 import org.eclipse.rap.rwt.visualization.google.internal.VisualizationWidgetLCA;
 
 public class PieChartLCA extends VisualizationWidgetLCA {
-  
-   public Class getWidgetType () {
-     return PieChart.class;
-   }
+
+  @Override
+  public Class<?> getWidgetType() {
+    return PieChart.class;
+  }
 }

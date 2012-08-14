@@ -92,6 +92,7 @@ public class MotionChart extends VisualizationWidget {
     super( parent, style );
   }
   
+  @Override
   public String getGoogleAPI() {
     return MOTION_CHART_API;
   }

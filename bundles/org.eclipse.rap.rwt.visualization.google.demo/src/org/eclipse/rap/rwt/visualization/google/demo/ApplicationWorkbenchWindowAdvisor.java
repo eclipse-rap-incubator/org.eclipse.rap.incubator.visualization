@@ -30,6 +30,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
         super(configurer);
     }
 
+    @Override
     public void preWindowOpen() {
         IWorkbenchWindowConfigurer configurer = getWindowConfigurer();
         configurer.setShowMenuBar(false);
@@ -39,6 +40,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
         configurer.setTitle("Custom RAP Widgets Demo - Google Visualizations");
     }
     
+    @Override
     public void postWindowCreate() {
        IWorkbenchWindow window = getWindowConfigurer().getWindow();
        Shell shell = window.getShell();

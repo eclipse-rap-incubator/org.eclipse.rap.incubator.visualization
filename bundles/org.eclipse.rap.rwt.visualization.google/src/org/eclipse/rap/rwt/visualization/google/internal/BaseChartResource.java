@@ -14,6 +14,7 @@ import org.eclipse.rap.rwt.visualization.google.internal.GoogleVisualizationReso
 
 public class BaseChartResource extends GoogleVisualizationResource {
   
+  @Override
   public String getLocation() {
     return "org/eclipse/rap/rwt/visualization/google/internal/BaseChart.js";
   }

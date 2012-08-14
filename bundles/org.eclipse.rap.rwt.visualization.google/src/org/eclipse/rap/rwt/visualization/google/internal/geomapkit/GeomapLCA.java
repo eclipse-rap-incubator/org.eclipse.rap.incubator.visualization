@@ -17,7 +17,8 @@ import org.eclipse.rap.rwt.visualization.google.internal.VisualizationWidgetLCA;
 
 public class GeomapLCA extends VisualizationWidgetLCA {
 
-   public Class getWidgetType () {
-     return Geomap.class;
-   }
+  @Override
+  public Class<?> getWidgetType() {
+    return Geomap.class;
+  }
 }

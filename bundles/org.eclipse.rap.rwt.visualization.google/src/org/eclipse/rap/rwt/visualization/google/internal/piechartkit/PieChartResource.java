@@ -14,6 +14,7 @@ import org.eclipse.rap.rwt.visualization.google.internal.GoogleVisualizationReso
 
 public class PieChartResource extends GoogleVisualizationResource {
 
+  @Override
   public String getLocation() {
     return "org/eclipse/rap/rwt/visualization/google/internal/piechartkit/PieChart.js";
   }

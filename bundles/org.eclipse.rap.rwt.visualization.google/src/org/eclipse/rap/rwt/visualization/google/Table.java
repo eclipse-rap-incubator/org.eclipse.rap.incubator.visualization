@@ -84,6 +84,7 @@ public class Table extends VisualizationWidget {
     super( parent, style );
   }
 
+  @Override
   public String getGoogleAPI() {
     return TABLE_API;
   }

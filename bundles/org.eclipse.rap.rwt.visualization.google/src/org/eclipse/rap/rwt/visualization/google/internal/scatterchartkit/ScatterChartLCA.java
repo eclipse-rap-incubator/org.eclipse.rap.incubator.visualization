@@ -16,8 +16,9 @@ import org.eclipse.rap.rwt.visualization.google.ScatterChart;
 import org.eclipse.rap.rwt.visualization.google.internal.VisualizationWidgetLCA;
 
 public class ScatterChartLCA extends VisualizationWidgetLCA {
-  
-   public Class getWidgetType () {
-     return ScatterChart.class;
-   }
+
+  @Override
+  public Class<?> getWidgetType() {
+    return ScatterChart.class;
+  }
 }

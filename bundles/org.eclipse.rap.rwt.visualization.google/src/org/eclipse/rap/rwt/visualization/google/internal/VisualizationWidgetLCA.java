@@ -14,15 +14,14 @@ package org.eclipse.rap.rwt.visualization.google.internal;
 
 import java.io.IOException;
 
-import org.eclipse.rap.rwt.visualization.google.VisualizationWidget;
 import org.eclipse.rap.rwt.internal.protocol.ClientObjectFactory;
 import org.eclipse.rap.rwt.internal.protocol.IClientObject;
 import org.eclipse.rap.rwt.lifecycle.AbstractWidgetLCA;
 import org.eclipse.rap.rwt.lifecycle.ControlLCAUtil;
 import org.eclipse.rap.rwt.lifecycle.IWidgetAdapter;
-import org.eclipse.rap.rwt.lifecycle.JSWriter;
 import org.eclipse.rap.rwt.lifecycle.WidgetLCAUtil;
 import org.eclipse.rap.rwt.lifecycle.WidgetUtil;
+import org.eclipse.rap.rwt.visualization.google.VisualizationWidget;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Widget;
 
@@ -38,6 +37,7 @@ import org.eclipse.swt.widgets.Widget;
  * be told to redraw.   
  * </p>
  */
+@SuppressWarnings("restriction")
 public abstract class VisualizationWidgetLCA extends AbstractWidgetLCA {
   protected static final String REDRAW_FUNC = "redraw";
   protected static final String PROP_DATA = "widgetData";
@@ -45,8 +45,9 @@ public abstract class VisualizationWidgetLCA extends AbstractWidgetLCA {
   
   private static final String[] ALLOWED_STYLES = new String[] { "BORDER" };
   
-  public abstract Class getWidgetType();
+  public abstract Class<?> getWidgetType();
   
+  @Override
   public void renderInitialization( final Widget widget ) throws IOException {
     Control control = (Control)widget;
     IClientObject clientObject = ClientObjectFactory.getClientObject( control );
@@ -56,6 +57,7 @@ public abstract class VisualizationWidgetLCA extends AbstractWidgetLCA {
     clientObject.set( "style", WidgetLCAUtil.getStyles( control, ALLOWED_STYLES ) );
    }
   
+  @Override
   public void preserveValues( final Widget widget ) {
     ControlLCAUtil.preserveValues( (Control)widget );
     WidgetLCAUtil.preserveCustomVariant( widget );
@@ -65,6 +67,7 @@ public abstract class VisualizationWidgetLCA extends AbstractWidgetLCA {
     adapter.preserve( PROP_DATA, ( ( VisualizationWidget )widget ).getWidgetData() );
   }
 
+  @Override
   public void renderChanges( final Widget widget ) throws IOException {
     ControlLCAUtil.renderChanges( ( Control )widget );
     WidgetLCAUtil.renderCustomVariant( widget );
@@ -87,6 +90,7 @@ public abstract class VisualizationWidgetLCA extends AbstractWidgetLCA {
     }
   }
 
+  @Override
   public void renderDispose( final Widget widget ) throws IOException {
     ClientObjectFactory.getClientObject( widget ).destroy();
   }

@@ -189,10 +189,11 @@ public class JSONGoogleDataTable {
    * Date objects are processed according to Google visualization requirements. 
    */
   //HACK [ar] : accomodation for bug 305278 - this is a bypass of JSONObject.toString().
+  @Override
   public String toString() {
     try {
       JSONObject table = createTable();
-      Iterator     keys = table.keys();
+      Iterator<?> keys = table.keys();
       StringBuffer sb = new StringBuffer("{");
       
       while (keys.hasNext()) {
@@ -271,10 +272,10 @@ public class JSONGoogleDataTable {
       return dateToString((Date)value);
     }
     if (value instanceof Map) {
-      return new JSONObject((Map)value).toString();
+      return new JSONObject((Map<?,?>)value).toString();
     }
     if (value instanceof Collection) {
-      return new JSONArray((Collection)value).toString();
+      return new JSONArray((Collection<?>)value).toString();
     }
     if (value.getClass().isArray()) {
       return new JSONArray(value).toString();
@@ -309,7 +310,7 @@ public class JSONGoogleDataTable {
   //HACK [ar] : accomodation for bug 305278 - this is a bypass of JSONObject.toString().
   private static String jsonObjectToString (JSONObject jObj) {
     try {
-      Iterator keys = jObj.keys();
+      Iterator<?> keys = jObj.keys();
       StringBuffer sb = new StringBuffer("{");
       
       while (keys.hasNext()) {

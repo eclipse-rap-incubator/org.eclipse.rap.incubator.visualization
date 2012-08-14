@@ -80,6 +80,7 @@ public class Application implements IEntryPoint
      
     private MotionChart viz;
 
+    @Override
     public void createPartControl (Composite parent) 
     {
       JSONGoogleDataTable dataTable = new JSONGoogleDataTable();
@@ -106,6 +107,7 @@ public class Application implements IEntryPoint
       viz.setToolTipText("Motion Chart");
     }
 
+    @Override
     public void setFocus() 
     {
       viz.setFocus();
@@ -118,6 +120,7 @@ public class Application implements IEntryPoint
      
     private AnnotatedTimeLine viz;
 
+    @Override
     public void createPartControl (Composite parent) 
     {
       JSONGoogleDataTable dataTable = new JSONGoogleDataTable();
@@ -134,6 +137,7 @@ public class Application implements IEntryPoint
       viz.setToolTipText("Annotated Timeline");
     }
     
+    @Override
     public void setFocus() 
     {
       viz.setFocus();
@@ -146,6 +150,7 @@ public class Application implements IEntryPoint
      
     private AreaChart viz;
     
+    @Override
     public void createPartControl (Composite parent) 
     {
       JSONGoogleDataTable dataTable = new JSONGoogleDataTable();
@@ -160,6 +165,7 @@ public class Application implements IEntryPoint
       viz.addListener(SWT.Selection, createSelectionListener());
     }
      
+    @Override
     public void setFocus() 
     {
       viz.setFocus();
@@ -172,6 +178,7 @@ public class Application implements IEntryPoint
      
     private BarChart viz;
     
+    @Override
     public void createPartControl (Composite parent) 
     {
       JSONGoogleDataTable dataTable = new JSONGoogleDataTable();
@@ -186,6 +193,7 @@ public class Application implements IEntryPoint
       viz.addListener(SWT.Selection, createSelectionListener());
     }
     
+    @Override
     public void setFocus() 
     {
       viz.setFocus();
@@ -198,6 +206,7 @@ public class Application implements IEntryPoint
      
     private ColumnChart viz;
     
+    @Override
     public void createPartControl (Composite parent) 
     {
       JSONGoogleDataTable dataTable = new JSONGoogleDataTable();
@@ -211,6 +220,7 @@ public class Application implements IEntryPoint
       viz.setWidgetData(dataTable.toString());
     }
     
+    @Override
     public void setFocus() 
     {
       viz.setFocus();
@@ -223,6 +233,7 @@ public class Application implements IEntryPoint
      
     private Gauge viz;
     
+    @Override
     public void createPartControl (Composite parent) 
     {
       JSONGoogleDataTable dataTable = new JSONGoogleDataTable();
@@ -235,6 +246,7 @@ public class Application implements IEntryPoint
       viz.setWidgetData(dataTable.toString());
     }
     
+    @Override
     public void setFocus() 
     {
       viz.setFocus();
@@ -247,6 +259,7 @@ public class Application implements IEntryPoint
      
     private Geomap viz;
     
+    @Override
     public void createPartControl (Composite parent) 
     {
       JSONGoogleDataTable dataTable = new JSONGoogleDataTable();
@@ -260,6 +273,7 @@ public class Application implements IEntryPoint
       viz.addListener(SWT.Selection, createSelectionListener());
     }
     
+    @Override
     public void setFocus() 
     {
       viz.setFocus();
@@ -272,6 +286,7 @@ public class Application implements IEntryPoint
      
     private IntensityMap viz;
     
+    @Override
     public void createPartControl (Composite parent) 
     {
       JSONGoogleDataTable dataTable = new JSONGoogleDataTable();
@@ -287,6 +302,7 @@ public class Application implements IEntryPoint
       viz.addListener(SWT.Selection, createSelectionListener());
     }
     
+    @Override
     public void setFocus() 
     {
       viz.setFocus();
@@ -299,6 +315,7 @@ public class Application implements IEntryPoint
     
     private LineChart viz;
     
+    @Override
     public void createPartControl (Composite parent) 
     {
       JSONGoogleDataTable dataTable = new JSONGoogleDataTable();
@@ -315,6 +332,7 @@ public class Application implements IEntryPoint
       viz.addListener(SWT.Selection, createSelectionListener());
     }
     
+    @Override
     public void setFocus() 
     {
       viz.setFocus();
@@ -327,6 +345,7 @@ public class Application implements IEntryPoint
      
     private PieChart viz;
     
+    @Override
     public void createPartControl (Composite parent) 
     {
       JSONGoogleDataTable dataTable = new JSONGoogleDataTable();
@@ -341,6 +360,7 @@ public class Application implements IEntryPoint
       viz.addListener(SWT.Selection, createSelectionListener());
     }
     
+    @Override
     public void setFocus() 
     {
       viz.setFocus();
@@ -353,6 +373,7 @@ public class Application implements IEntryPoint
      
     private ScatterChart viz;
     
+    @Override
     public void createPartControl (Composite parent) 
     {
       JSONGoogleDataTable dataTable = new JSONGoogleDataTable();
@@ -368,6 +389,7 @@ public class Application implements IEntryPoint
       viz.addListener(SWT.Selection, createSelectionListener());
     }
     
+    @Override
     public void setFocus() 
     {
       viz.setFocus();
@@ -380,6 +402,7 @@ public class Application implements IEntryPoint
     
     private Table viz;
     
+    @Override
     public void createPartControl (Composite parent) 
     {
       JSONGoogleDataTable dataTable = new JSONGoogleDataTable();
@@ -393,6 +416,7 @@ public class Application implements IEntryPoint
       viz.addListener(SWT.Selection, createSelectionListener());
     }
     
+    @Override
     public void setFocus() 
     {
       viz.setFocus();

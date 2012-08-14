@@ -17,7 +17,8 @@ import org.eclipse.rap.rwt.visualization.google.internal.VisualizationWidgetLCA;
 
 public class IntensityMapLCA extends VisualizationWidgetLCA {
 
-   public Class getWidgetType () {
-      return IntensityMap.class;
-   }
+  @Override
+  public Class<?> getWidgetType() {
+    return IntensityMap.class;
+  }
 }

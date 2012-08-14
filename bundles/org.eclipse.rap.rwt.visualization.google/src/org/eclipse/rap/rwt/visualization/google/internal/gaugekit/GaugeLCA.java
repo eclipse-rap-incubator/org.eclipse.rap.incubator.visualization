@@ -17,7 +17,8 @@ import org.eclipse.rap.rwt.visualization.google.internal.VisualizationWidgetLCA;
 
 public class GaugeLCA extends VisualizationWidgetLCA {
 
-   public Class getWidgetType () {
-     return Gauge.class;
-   }
+  @Override
+  public Class<?> getWidgetType() {
+    return Gauge.class;
+  }
 }

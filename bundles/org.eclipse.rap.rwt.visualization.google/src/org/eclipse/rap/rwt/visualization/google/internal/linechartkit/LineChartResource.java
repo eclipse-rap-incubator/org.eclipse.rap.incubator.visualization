@@ -14,6 +14,7 @@ import org.eclipse.rap.rwt.visualization.google.internal.GoogleVisualizationReso
 
 public class LineChartResource extends GoogleVisualizationResource {
 
+  @Override
   public String getLocation() {
     return "org/eclipse/rap/rwt/visualization/google/internal/linechartkit/LineChart.js";
   }

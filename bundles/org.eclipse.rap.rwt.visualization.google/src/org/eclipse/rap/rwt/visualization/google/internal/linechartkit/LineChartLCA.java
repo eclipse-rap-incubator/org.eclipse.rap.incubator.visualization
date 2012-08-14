@@ -12,29 +12,13 @@
  ******************************************************************************/
 package org.eclipse.rap.rwt.visualization.google.internal.linechartkit;
 
-import java.io.IOException;
-
-import org.eclipse.rap.rwt.lifecycle.ControlLCAUtil;
-import org.eclipse.rap.rwt.lifecycle.JSWriter;
 import org.eclipse.rap.rwt.visualization.google.LineChart;
 import org.eclipse.rap.rwt.visualization.google.internal.VisualizationWidgetLCA;
-import org.eclipse.swt.widgets.Widget;
 
 public class LineChartLCA extends VisualizationWidgetLCA {
   
-  public Class getWidgetType () {
+  @Override
+  public Class<?> getWidgetType() {
     return LineChart.class;
-  }
-  
-  public void renderChanges( final Widget widget ) throws IOException {
-    super.renderChanges(widget);
-    LineChart vWidget = ( LineChart )widget;
-    ControlLCAUtil.writeChanges( vWidget );
-    JSWriter writer = JSWriter.getWriterFor( vWidget );
-    //HACK to force redraw when requested
-    if (vWidget.isDirty()) {
-      writer.call( REDRAW_FUNC, null );
-      vWidget.setDirty(false);
-    }
   }
 }

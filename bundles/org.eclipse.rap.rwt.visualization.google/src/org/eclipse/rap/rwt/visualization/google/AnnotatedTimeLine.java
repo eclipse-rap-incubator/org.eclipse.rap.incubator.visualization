@@ -85,6 +85,7 @@ public class AnnotatedTimeLine extends VisualizationWidget {
     super( parent, style );
   }
   
+  @Override
   public String getGoogleAPI () {
     return ANNOTATED_TIMELINE_API;
   }

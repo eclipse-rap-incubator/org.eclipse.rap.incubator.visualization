@@ -16,8 +16,9 @@ import org.eclipse.rap.rwt.visualization.google.Table;
 import org.eclipse.rap.rwt.visualization.google.internal.VisualizationWidgetLCA;
 
 public class TableLCA extends VisualizationWidgetLCA {
-  
-   public Class getWidgetType () {
-     return Table.class;
-   }
+
+  @Override
+  public Class<?> getWidgetType() {
+    return Table.class;
+  }
 }

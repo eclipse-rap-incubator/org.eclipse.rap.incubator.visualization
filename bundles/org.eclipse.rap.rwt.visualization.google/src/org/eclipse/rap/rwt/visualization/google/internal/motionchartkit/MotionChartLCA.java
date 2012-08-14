@@ -19,10 +19,12 @@ import org.eclipse.swt.widgets.Widget;
 
 public class MotionChartLCA extends VisualizationWidgetLCA {
   
-  public Class getWidgetType () {
+  @Override
+  public Class<?> getWidgetType() {
      return MotionChart.class;
   }
   
+  @Override
   public void readData(Widget widget) {
     super.readData(widget);
     if (widget==null) return;

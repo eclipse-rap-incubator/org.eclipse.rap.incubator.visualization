@@ -14,6 +14,7 @@ import org.eclipse.rap.rwt.visualization.google.internal.GoogleVisualizationReso
 
 public class GaugeResource extends GoogleVisualizationResource {
   
+  @Override
   public String getLocation() {
     return "org/eclipse/rap/rwt/visualization/google/internal/gaugekit/Gauge.js";
   }
