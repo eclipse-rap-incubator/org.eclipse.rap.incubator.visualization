@@ -16,13 +16,14 @@ package org.eclipse.rap.rwt.visualization.jit.internal;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Vector;
 
+import org.eclipse.rap.rwt.internal.protocol.ClientObjectFactory;
+import org.eclipse.rap.rwt.internal.protocol.IClientObject;
 import org.eclipse.rap.rwt.lifecycle.AbstractWidgetLCA;
 import org.eclipse.rap.rwt.lifecycle.ControlLCAUtil;
 import org.eclipse.rap.rwt.lifecycle.IWidgetAdapter;
-import org.eclipse.rap.rwt.lifecycle.JSVar;
-import org.eclipse.rap.rwt.lifecycle.JSWriter;
 import org.eclipse.rap.rwt.lifecycle.WidgetLCAUtil;
 import org.eclipse.rap.rwt.lifecycle.WidgetUtil;
 import org.eclipse.rap.rwt.visualization.jit.JITVisualizationWidget;
@@ -34,6 +35,8 @@ public abstract class JITWidgetLCA extends AbstractWidgetLCA {
   private static final String WIDGET_DATA = "widgetData";
   private static final String PROP_VISIBLE = "visible";
 
+  private static final String[] ALLOWED_STYLES = new String[] { "BORDER" };
+  
   public abstract Class getWidgetType();
   
   protected Collection getInitializationParameters (JITVisualizationWidget vWidget) {
@@ -44,12 +47,12 @@ public abstract class JITWidgetLCA extends AbstractWidgetLCA {
   }
   
   public void renderInitialization( final Widget widget ) throws IOException {
-     JITVisualizationWidget vWidget = (JITVisualizationWidget)widget;
-     JSWriter writer = JSWriter.getWriterFor( vWidget );
-     writer.newWidget( getWidgetType().getName(), getInitializationParameters(vWidget).toArray() );
-     writer.set( "appearance", "composite" );
-     writer.set( "overflow", "hidden" );
-     ControlLCAUtil.writeStyleFlags( ( Control ) widget );
+     Control control = (Control)widget;
+     IClientObject clientObject = ClientObjectFactory.getClientObject( control );
+     clientObject.create( getWidgetType().getCanonicalName() );
+//     clientObject.set( "id", WidgetUtil.getId( control ) );
+     clientObject.set( "parent", WidgetUtil.getId( control.getParent() ) );
+     clientObject.set( "style", WidgetLCAUtil.getStyles( control, ALLOWED_STYLES ) );
    }
   
   public void preserveValues( final Widget widget ) {
@@ -57,36 +60,38 @@ public abstract class JITWidgetLCA extends AbstractWidgetLCA {
     ControlLCAUtil.preserveValues( vWidget );
     IWidgetAdapter adapter = WidgetUtil.getAdapter( vWidget );
     adapter.preserve( PROP_VISIBLE, String.valueOf(vWidget.isVisible()));
-    adapter.preserve( WIDGET_DATA, new JSVar(vWidget.getJSONData()));
+    adapter.preserve( WIDGET_DATA, vWidget.getJSONData());
     // only needed for custom variants (theming)
     WidgetLCAUtil.preserveCustomVariant( vWidget );
   }
 
   public void renderChanges( final Widget widget ) throws IOException {
+    ControlLCAUtil.renderChanges( ( Control )widget );
+    WidgetLCAUtil.renderCustomVariant( widget );
+    
     JITVisualizationWidget vWidget = ( JITVisualizationWidget )widget;
-    JSWriter writer = JSWriter.getWriterFor( vWidget );
-    writer.set( PROP_VISIBLE, PROP_VISIBLE, String.valueOf(vWidget.isVisible()));
-    //We compare the JSON text directly because JSVar does not override Object.equals();
-    IWidgetAdapter adapter = WidgetUtil.getAdapter( vWidget );
-    JSVar oldValue = (JSVar)adapter.getPreserved( WIDGET_DATA );
-    String jsonData = vWidget.getJSONData();
-    if (jsonData != null && (oldValue == null || !jsonData.equals(oldValue.toString()))) {
-      writer.set( WIDGET_DATA, WIDGET_DATA, new JSVar(jsonData));
+    IClientObject clientObject = ClientObjectFactory.getClientObject( vWidget );
+    IWidgetAdapter adapter = WidgetUtil.getAdapter(widget);
+    boolean changed = !adapter.isInitialized() || WidgetLCAUtil.hasChanged(widget, PROP_VISIBLE, vWidget.isVisible());
+    if (changed) {
+      clientObject.set(PROP_VISIBLE, vWidget.isVisible());
     }
-    ControlLCAUtil.writeChanges( vWidget );
+    changed = WidgetLCAUtil.hasChanged(widget, WIDGET_DATA, vWidget.getJSONData());
+    if (changed) {
+      clientObject.set(WIDGET_DATA, vWidget.getJSONData());
+    }
     
     WidgetCommandQueue cmdQueue = (WidgetCommandQueue) vWidget.getAdapter(WidgetCommandQueue.class);
     if (cmdQueue != null) {
       while (cmdQueue.peek() != null) {
         Object[] functionCall = (Object[])cmdQueue.poll();
-        writer.call((String)functionCall[0], (Object[])functionCall[1]);
+        clientObject.call((String)functionCall[0], (Map<String,Object>)functionCall[1]);
       }
     }
   }
 
   public void renderDispose( final Widget widget ) throws IOException {
-    JSWriter writer = JSWriter.getWriterFor( widget );
-    writer.dispose();
+    ClientObjectFactory.getClientObject( widget ).destroy();
   }
 
   public void createResetHandlerCalls( String typePoolId ) throws IOException {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010-2011 Austin Riddle, and others.
+ * Copyright (c) 2010-2011 Austin Riddle.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,18 +7,15 @@
  * 
  * Contributors:
  *     Austin Riddle - initial API, implementation and documentation
- *     Cole Markham (Texas Center for Applied Technology) - 
- *        widget data passing to client side
  ******************************************************************************/
-package org.eclipse.rap.rwt.visualization.jit.internal.hypertreekit;
+package org.eclipse.rap.rwt.visualization.jit.internal.barchartkit;
 
-import org.eclipse.rap.rwt.visualization.jit.HyperTree;
-import org.eclipse.rap.rwt.visualization.jit.internal.JITGraphLCA;
+import org.eclipse.rap.rwt.visualization.jit.internal.JITVisualizationResource;
 
-public class HyperTreeLCA extends JITGraphLCA {
+public class BarChartResource extends JITVisualizationResource {
 
-  @Override
-  public Class<?> getWidgetType() {
-    return HyperTree.class;
+  public String getLocation() {
+    return "org/eclipse/rap/rwt/visualization/jit/internal/barchartkit/BarChart.js";
   }
+  
 }

@@ -6,8 +6,8 @@
          point="org.eclipse.rap.ui.entrypoint">
       <entrypoint
             class="org.eclipse.rap.rwt.visualization.google.demo.Application"
-            parameter="demo"
-            id="org.eclipse.rap.rwt.visualization.google.demo.Application">
+            id="org.eclipse.rap.rwt.visualization.google.demo.Application"
+            path="/googlevis">
       </entrypoint>
    </extension>
    <extension
@@ -15,7 +15,6 @@
       <branding
             defaultEntrypointId="org.eclipse.rap.rwt.visualization.google.demo.Application"
             id="org.eclipse.rap.rwt.visualization.google.demo.branding"
-            servletName="googlevis"
             title="RWT Google Visualizations">
       </branding>
    </extension>

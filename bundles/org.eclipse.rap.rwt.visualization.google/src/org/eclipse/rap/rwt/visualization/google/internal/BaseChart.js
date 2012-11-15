@@ -13,33 +13,33 @@
 //The reason this is still a qooxdoo widget is because google embeds the chart in an iframe. 
 qx.Class.define( "org.eclipse.rap.rwt.visualization.google.BaseChart", {
     type: "abstract",
-    extend: qx.ui.layout.CanvasLayout,
+    extend: rwt.widgets.base.Parent,
     
     statics : 
     { 
       registerAdapter : function(className, constructor) {
-    	  org.eclipse.rwt.protocol.AdapterRegistry.add( className, {
+    	  rwt.protocol.AdapterRegistry.add( className, {
 
     		  factory : function( properties ) {
     		    var result = new constructor();
-    		    org.eclipse.rwt.protocol.AdapterUtil.addStatesForStyles( result, properties.style );
+    		    rwt.protocol.AdapterUtil.addStatesForStyles( result, properties.style );
     		    result.setUserData( "isControl", true );
-    		    org.eclipse.rwt.protocol.AdapterUtil.setParent( result, properties.parent );
+    		    rwt.protocol.AdapterUtil.setParent( result, properties.parent );
     		    return result;
     		  },
     		  
-    		  destructor : org.eclipse.rwt.protocol.AdapterUtil.getControlDestructor(),
+    		  destructor : rwt.protocol.AdapterUtil.getControlDestructor(),
 
-    		  properties : org.eclipse.rwt.protocol.AdapterUtil.extendControlProperties( [
+    		  properties : rwt.protocol.AdapterUtil.extendControlProperties( [
     		    "widgetData",
     		    "widgetOptions",
     		  ] ),
 
-    		  propertyHandler : org.eclipse.rwt.protocol.AdapterUtil.extendControlPropertyHandler( {} ),   
+    		  propertyHandler : rwt.protocol.AdapterUtil.extendControlPropertyHandler( {} ),   
 
-    		  listeners : org.eclipse.rwt.protocol.AdapterUtil.extendControlListeners( [] ),
+    		  listeners : rwt.protocol.AdapterUtil.extendControlListeners( [] ),
 
-    		  listenerHandler : org.eclipse.rwt.protocol.AdapterUtil.extendControlListenerHandler( {} ),
+    		  listenerHandler : rwt.protocol.AdapterUtil.extendControlListenerHandler( {} ),
 
     		  methods : [
     		    "redraw"
@@ -158,7 +158,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.BaseChart", {
         
         refreshWidgetOptions : function() {
         	try {
-	        	qx.ui.core.Widget.flushGlobalQueues();
+        		rwt.widgets.base.Widget.flushGlobalQueues();
 	        	var opString = this.getWidgetOptions();
 	        	opString = opString.replace(new RegExp("~","g"), "\"");
 	        	var evalStr = "({" + opString;
@@ -171,7 +171,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.BaseChart", {
         },
         
         redraw : function () {
-          qx.client.Timer.once( function() {
+          rwt.client.Timer.once( function() {
             try {
               this.initialize();
               this.info("Attempting to redraw: "+this._dataTable+", "+this._options);

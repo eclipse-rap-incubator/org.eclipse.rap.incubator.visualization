@@ -16,8 +16,7 @@
  *****************************************************************************/
 package org.eclipse.rap.rwt.excanvas;
 
-import org.eclipse.rap.rwt.resources.IResource;
-import org.eclipse.rap.rwt.resources.IResourceManager.RegisterOptions;
+import org.eclipse.rap.ui.resources.IResource;
 
 
 public class ExCanvasResource implements IResource {
@@ -30,10 +29,6 @@ public class ExCanvasResource implements IResource {
 
   public ClassLoader getLoader() {
     return this.getClass().getClassLoader();
-  }
-
-  public RegisterOptions getOptions() {
-    return RegisterOptions.VERSION_AND_COMPRESS;
   }
 
   public String getLocation() {

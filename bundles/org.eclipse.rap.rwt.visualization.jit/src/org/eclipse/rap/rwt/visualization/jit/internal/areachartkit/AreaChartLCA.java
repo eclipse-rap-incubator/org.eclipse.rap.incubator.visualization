@@ -10,15 +10,15 @@
  *     Cole Markham (Texas Center for Applied Technology) - 
  *        widget data passing to client side
  ******************************************************************************/
-package org.eclipse.rap.rwt.visualization.jit.internal.hypertreekit;
+package org.eclipse.rap.rwt.visualization.jit.internal.areachartkit;
 
-import org.eclipse.rap.rwt.visualization.jit.HyperTree;
-import org.eclipse.rap.rwt.visualization.jit.internal.JITGraphLCA;
+import org.eclipse.rap.rwt.visualization.jit.AreaChart;
+import org.eclipse.rap.rwt.visualization.jit.internal.JITWidgetLCA;
 
-public class HyperTreeLCA extends JITGraphLCA {
+public class AreaChartLCA extends JITWidgetLCA {
 
   @Override
   public Class<?> getWidgetType() {
-    return HyperTree.class;
+    return AreaChart.class;
   }
 }

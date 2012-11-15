@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.rap.rwt.visualization.google.internal;
 
-import org.eclipse.rap.rwt.resources.IResource;
-import org.eclipse.rap.rwt.resources.IResourceManager.RegisterOptions;
+import org.eclipse.rap.ui.resources.IResource;
+
 
 public class GoogleAPIResource implements IResource {
 
@@ -23,10 +23,6 @@ public class GoogleAPIResource implements IResource {
 
   public ClassLoader getLoader() {
     return this.getClass().getClassLoader();
-  }
-
-  public RegisterOptions getOptions() {
-    return RegisterOptions.VERSION;
   }
 
   public String getLocation() {

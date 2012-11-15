@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright (C) 2010-2011 Texas Center for Applied Technology
+ * Copyright � 2010-2011 Texas Center for Applied Technology
  * Texas Engineering Experiment Station
  * The Texas A&M University System
  * All Rights Reserved.
@@ -23,6 +23,8 @@ import java.io.InputStreamReader;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.rap.rwt.lifecycle.IEntryPoint;
+import org.eclipse.rap.rwt.visualization.jit.AreaChart;
+import org.eclipse.rap.rwt.visualization.jit.BarChart;
 import org.eclipse.rap.rwt.visualization.jit.HyperTree;
 import org.eclipse.rap.rwt.visualization.jit.JITVisualizationWidget;
 import org.eclipse.rap.rwt.visualization.jit.RGraph;
@@ -242,6 +244,48 @@ public class Application implements IEntryPoint {
       viz.setEdgeProperty("type", "bezier");
       viz.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
       viz.addListener(SWT.Selection, createSelectionListener());
+    }
+    
+    public void setFocus()
+    {
+      viz.setFocus();
+    }
+    
+  }
+  
+  public static class BarChartExample extends ViewPart 
+  {
+    
+    private BarChart viz;
+    
+    public void createPartControl (Composite parent) 
+    {
+      viz = new BarChart(parent, SWT.BORDER);
+      String sampleData = loadSampleData("samples/barchart.json");
+      viz.setJSONData(sampleData);
+      viz.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
+      viz.addListener(SWT.Selection, createSelectionListener());
+    }
+    
+    public void setFocus()
+    {
+      viz.setFocus();
+    }
+    
+  }
+  
+  public static class AreaChartExample extends ViewPart 
+  {
+    
+    private AreaChart viz;
+    
+    public void createPartControl (Composite parent) 
+    {
+       viz = new AreaChart(parent, SWT.BORDER);
+       String sampleData = loadSampleData("samples/areachart.json");
+       viz.setJSONData(sampleData);
+       viz.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
+       viz.addListener(SWT.Selection, createSelectionListener());
     }
     
     public void setFocus()

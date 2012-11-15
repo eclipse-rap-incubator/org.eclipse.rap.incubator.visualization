@@ -1,5 +1,7 @@
 package org.eclipse.rap.rwt.visualization.jit;
 
+import java.util.HashMap;
+
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 
@@ -55,7 +57,10 @@ public abstract class JITGraphWidget extends JITVisualizationWidget {
    * @param propValue - the value of the property
    */
   public void setProperty (String propName, Object propValue) {
-     addCommand("setProperty", new Object[] {propName, propValue});
+    HashMap<String,Object> args = new HashMap<String,Object>();
+    args.put( "propName", propName );
+    args.put( "propValue", propValue );
+    addCommand("setProperty", args);
   }
   
   /**
@@ -67,7 +72,10 @@ public abstract class JITGraphWidget extends JITVisualizationWidget {
    */
   public void setNodeProperty(String propName, Object propValue)
   {
-     addCommand("setNodeProperty", new Object[] {propName, propValue});
+    HashMap<String,Object> args = new HashMap<String,Object>();
+    args.put( "propName", propName );
+    args.put( "propValue", propValue );
+    addCommand("setNodeProperty", args);
   }
 
   /**
@@ -78,7 +86,10 @@ public abstract class JITGraphWidget extends JITVisualizationWidget {
    */
   public void setEdgeProperty(String propName, Object propValue)
   {
-     addCommand("setEdgeProperty", new Object[] {propName, propValue});
+    HashMap<String,Object> args = new HashMap<String,Object>();
+    args.put( "propName", propName );
+    args.put( "propValue", propValue );
+    addCommand("setEdgeProperty", args);
   }
   
   /**
@@ -87,7 +98,9 @@ public abstract class JITGraphWidget extends JITVisualizationWidget {
    * @param percent - the percentage zoom level
    */
   public void setZoom(double percent) {
-     addCommand("setZoom", new Object[] {Double.valueOf(percent)});
+    HashMap<String,Object> args = new HashMap<String,Object>();
+    args.put( "percent", Double.valueOf(percent) );
+    addCommand("setZoom", args);
   }
 
   protected String convertRGBToCSSString(RGB color) {

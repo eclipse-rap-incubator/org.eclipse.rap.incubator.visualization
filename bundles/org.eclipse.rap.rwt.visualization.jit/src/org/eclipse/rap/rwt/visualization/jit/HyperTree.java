@@ -13,6 +13,8 @@
  *****************************************************************************/
 package org.eclipse.rap.rwt.visualization.jit;
 
+import java.util.HashMap;
+
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 
@@ -34,7 +36,9 @@ public class HyperTree extends JITGraphWidget
       }
       if (!navStack.isEmpty()) {
         Object id = navStack.pop();
-        addCommand("selectNode", new Object[] {id});
+        HashMap<String,Object> args = new HashMap<String,Object>();
+        args.put( "id", id );
+        addCommand("selectNode", args);
       }
     }
   }
