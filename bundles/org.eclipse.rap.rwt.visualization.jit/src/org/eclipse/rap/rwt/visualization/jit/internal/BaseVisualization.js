@@ -231,28 +231,3 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.jit.BaseVisualization", {
     }
     
 } );
-  		selectNode : function (id) {
-  			try {
-  				this.info("Forcing selection to : "+id);
-  				var ht = this._viz;
-  				if (ht != null) {
-  					ht.onClick(id);
-  				}
-  			}
-  			catch (e) {
-  				this.info(e);
-  			}
-  		},
-        
-        _sendResponse : function(widget, field, value) {
-			//if (!org.eclipse.swt.EventUtil.getSuspended()) {
-				var wm = org.eclipse.swt.WidgetManager.getInstance();
-				var canvasId = wm.findIdByWidget(widget);
-				var req = rwt.remote.Server.getInstance();
-				req.addParameter(canvasId + "." + field, value);
-				req.send();
-			//}
-		}
-    }
-    
-} );
