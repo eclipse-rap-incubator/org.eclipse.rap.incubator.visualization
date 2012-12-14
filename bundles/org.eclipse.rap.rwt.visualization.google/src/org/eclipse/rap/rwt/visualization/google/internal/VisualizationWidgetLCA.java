@@ -51,7 +51,8 @@ public abstract class VisualizationWidgetLCA extends AbstractWidgetLCA {
   public void renderInitialization( final Widget widget ) throws IOException {
     Control control = (Control)widget;
     IClientObject clientObject = ClientObjectFactory.getClientObject( control );
-    clientObject.create( getWidgetType().getCanonicalName() );
+    String canonicalName = getWidgetType().getCanonicalName();
+    clientObject.create( canonicalName );
 //    clientObject.set( "id", WidgetUtil.getId( control ) );
     clientObject.set( "parent", WidgetUtil.getId( control.getParent() ) );
     clientObject.set( "style", WidgetLCAUtil.getStyles( control, ALLOWED_STYLES ) );

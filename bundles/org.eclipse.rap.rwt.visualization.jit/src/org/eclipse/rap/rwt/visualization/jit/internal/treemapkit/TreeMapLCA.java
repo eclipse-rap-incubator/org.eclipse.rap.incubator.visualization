@@ -19,14 +19,15 @@ import org.eclipse.rap.rwt.visualization.jit.internal.JITWidgetLCA;
 
 public class TreeMapLCA extends JITWidgetLCA {
 
-  public Class getWidgetType () {
+  @Override
+  public Class<?> getWidgetType() {
     return TreeMap.class;
   }
-  
-  protected Collection getInitializationParameters(JITVisualizationWidget vWidget) {
-    Collection params = super.getInitializationParameters(vWidget);
-    params.add(new Integer(((TreeMap)vWidget).getType()));
+
+  @Override
+  protected Collection<?> getInitializationParameters( JITVisualizationWidget vWidget ) {
+    Collection params = super.getInitializationParameters( vWidget );
+    params.add( new Integer( ( ( TreeMap )vWidget ).getType() ) );
     return params;
   }
-  
 }

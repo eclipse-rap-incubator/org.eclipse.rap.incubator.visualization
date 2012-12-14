@@ -1,5 +1,7 @@
 package org.eclipse.rap.rwt.visualization.jit;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 import org.eclipse.rap.rwt.visualization.jit.internal.JITWidgetLCA.WidgetCommandQueue;
@@ -61,7 +63,9 @@ public abstract class JITVisualizationWidget extends Composite {
    */
   public void setSelectedNodeId (String selectedNodeId) {
     this.selectedNodeId = selectedNodeId;
-    addCommand("selectNode",new Object[]{selectedNodeId});
+    HashMap<String,Object> args = new HashMap<String,Object>();
+    args.put( "id", selectedNodeId );
+    addCommand("selectNode",args);
   }
   
   /**
@@ -77,7 +81,7 @@ public abstract class JITVisualizationWidget extends Composite {
    * @param cmd - the name of the function to execute.
    * @param args and array of function arguments. Can be <code>null</code>.
    */
-  protected synchronized void addCommand (String cmd, Object[] args) {
+  protected synchronized void addCommand (String cmd, Map<String,Object> args) {
     if (cmdQueue == null) {
       cmdQueue = new WidgetCommandQueue(); 
     }

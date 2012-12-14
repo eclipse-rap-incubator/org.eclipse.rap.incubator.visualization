@@ -21,7 +21,7 @@ package org.eclipse.rap.rwt.visualization.google.demo;
 
 import java.util.Date;
 
-import org.eclipse.rap.rwt.lifecycle.IEntryPoint;
+import org.eclipse.rap.rwt.application.EntryPoint;
 import org.eclipse.rap.rwt.visualization.google.AnnotatedTimeLine;
 import org.eclipse.rap.rwt.visualization.google.AreaChart;
 import org.eclipse.rap.rwt.visualization.google.BarChart;
@@ -49,7 +49,7 @@ import org.eclipse.ui.part.ViewPart;
  * This class controls all aspects of the application's execution
  * and is contributed through the plugin.xml.
  */
-public class Application implements IEntryPoint 
+public class Application implements EntryPoint 
 {
  
   public static Listener createSelectionListener () {

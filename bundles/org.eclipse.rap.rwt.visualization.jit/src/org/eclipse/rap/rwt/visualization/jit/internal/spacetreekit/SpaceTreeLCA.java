@@ -17,8 +17,8 @@ import org.eclipse.rap.rwt.visualization.jit.internal.JITGraphLCA;
 
 public class SpaceTreeLCA extends JITGraphLCA {
 
-  public Class getWidgetType () {
+  @Override
+  public Class<?> getWidgetType() {
     return SpaceTree.class;
   }
-  
 }
