@@ -137,7 +137,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.jit.BaseVisualization", {
   		      var data = this.getWidgetData();
   		      if (data != null) {
   		        this.info("Loading visualization data.");
-  		        rg.loadJSON(data);
+  		        rg.loadJSON(eval("("+data+")"));
   		        this.info("Refreshing visualization.");
   		        rg.refresh();
   		        rg.controller.onAfterCompute();
