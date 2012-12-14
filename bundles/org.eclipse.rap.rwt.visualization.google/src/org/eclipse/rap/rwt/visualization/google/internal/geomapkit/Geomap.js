@@ -94,7 +94,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.Geomap", {
 	            	this.selectedItem = selection;
 
 	            	//fire selection event
-	            	var req = org.eclipse.swt.Request.getInstance();
+	            	var req = rwt.remote.Server.getInstance();
 	            	req.addParameter(widgetId + ".selectedItem", this.selectedItem);
 	            	req.addEvent( "org.eclipse.swt.events.widgetSelected", widgetId );
 	            	req.send();
@@ -148,7 +148,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.Geomap", {
 			//if (!org.eclipse.swt.EventUtil.getSuspended()) {
 				var wm = org.eclipse.swt.WidgetManager.getInstance();
 				var canvasId = wm.findIdByWidget(widget);
-				var req = org.eclipse.swt.Request.getInstance();
+				var req = rwt.remote.Server.getInstance();
 				req.addParameter(canvasId + "." + field, value);
 				req.send();
 			//}

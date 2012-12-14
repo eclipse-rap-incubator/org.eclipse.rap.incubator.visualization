@@ -100,7 +100,7 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.TreeMap",
 //			        var node = elem;
 //		        	qParent.selection = node;
 //		        	//fire selection event
-//		        	var req = org.eclipse.swt.Request.getInstance();
+//		        	var req = rwt.remote.Server.getInstance();
 //		        	req.addParameter(widgetId + ".selectedNode", node.id);
 //		        	req.addEvent( "org.eclipse.swt.events.widgetSelected", widgetId );
 //		        	req.send();
@@ -110,7 +110,7 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.TreeMap",
 //			        this.out();
 //		        	qParent.selection = node;
 //		        	//fire selection event
-//		        	var req = org.eclipse.swt.Request.getInstance();
+//		        	var req = rwt.remote.Server.getInstance();
 //		        	req.addParameter(widgetId + ".selectedNode", this.shownTree.id);
 //		        	req.addEvent( "org.eclipse.swt.events.widgetSelected", widgetId );
 //		        	req.send();

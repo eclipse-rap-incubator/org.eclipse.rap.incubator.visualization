@@ -126,7 +126,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.MotionChart", {
 			//if (!org.eclipse.swt.EventUtil.getSuspended()) {
 				var wm = org.eclipse.swt.WidgetManager.getInstance();
 				var canvasId = wm.findIdByWidget(widget);
-				var req = org.eclipse.swt.Request.getInstance();
+				var req = rwt.remote.Server.getInstance();
 				req.addParameter(canvasId + "." + field, value);
 				req.send();
 			//}

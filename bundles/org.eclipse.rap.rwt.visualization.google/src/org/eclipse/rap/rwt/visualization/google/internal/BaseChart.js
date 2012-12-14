@@ -131,7 +131,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.BaseChart", {
         	    this.selectedValue = dataTable.getValue(selObj.row, selObj.column);
         	    
         	    //fire selection event
-        	    var req = org.eclipse.swt.Request.getInstance();
+        	    var req = rwt.remote.Server.getInstance();
         	    req.addParameter(widgetId + ".selectedItem", this.selectedItem);
         	    req.addParameter(widgetId + ".selectedRow", this.selectedRow);
         	    req.addParameter(widgetId + ".selectedColumn", this.selectedColumn);
@@ -146,9 +146,12 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.BaseChart", {
         
         refreshWidgetData : function() {
         	try {
-	        	var data = eval('(' + this.getWidgetData() + ')');
+        	  var jsonData = this.getWidgetData();
+        	  if (jsonData != null && jsonData != "") {
+	        	  var data = eval('(' + jsonData + ')');
 	            this._dataTable = new google.visualization.DataTable(data);
 	            this.info("Setting data set to : "+this._dataTable);
+        	  }
         	}
         	catch (err) {
         		this.info("Attempted to set data but failed.");
@@ -190,7 +193,7 @@ qx.Class.define( "org.eclipse.rap.rwt.visualization.google.BaseChart", {
 			//if (!org.eclipse.swt.EventUtil.getSuspended()) {
 				var wm = org.eclipse.swt.WidgetManager.getInstance();
 				var canvasId = wm.findIdByWidget(widget);
-				var req = org.eclipse.swt.Request.getInstance();
+				var req = rwt.remote.Server.getInstance();
 				req.addParameter(canvasId + "." + field, value);
 				req.send();
 			//}

@@ -22,7 +22,9 @@ import java.io.InputStreamReader;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.rap.rwt.lifecycle.IEntryPoint;
+import org.eclipse.rap.rwt.application.EntryPoint;
+import org.eclipse.rap.rwt.visualization.jit.AreaChart;
+import org.eclipse.rap.rwt.visualization.jit.BarChart;
 import org.eclipse.rap.rwt.visualization.jit.AreaChart;
 import org.eclipse.rap.rwt.visualization.jit.BarChart;
 import org.eclipse.rap.rwt.visualization.jit.HyperTree;
@@ -52,7 +54,7 @@ import org.osgi.framework.Bundle;
  * This class controls all aspects of the application's execution
  * and is contributed through the plugin.xml.
  */
-public class Application implements IEntryPoint {
+public class Application implements EntryPoint {
    
   public static Listener createSelectionListener () {
     return new Listener() 

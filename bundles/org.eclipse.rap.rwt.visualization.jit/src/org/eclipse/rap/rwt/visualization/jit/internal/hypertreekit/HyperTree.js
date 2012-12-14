@@ -99,7 +99,7 @@ qx.Class.define("org.eclipse.rap.rwt.visualization.jit.HyperTree",
 						//qParent.selection = node;
 						//fire selection event
 						parent.info("Sending selected node: "+node.id);
-						var req = org.eclipse.swt.Request.getInstance();
+						var req = rwt.remote.Server.getInstance();
 						req.addParameter(widgetId + ".selectedNode", node.id);
 						req.addEvent( "org.eclipse.swt.events.widgetSelected", widgetId );
 						req.send();
